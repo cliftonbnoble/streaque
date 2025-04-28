@@ -1,0 +1,199 @@
+/* src/components/Hero.css */
+.hero-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background-color: #1a1a1a;
+}
+
+/* Lava lamp background pseudo-element for wrapper */
+.hero-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    #ff8a00,
+    #e52e71,
+    #9c27b0,
+    #2196f3,
+    #4caf50,
+    #ffeb3b
+  );
+  background-size: 400% 400%;
+  animation: lavaFlow 25s ease infinite;
+  z-index: -1;
+  filter: blur(100px);
+  opacity: 0.7;
+}
+
+/* Second layer of blobs */
+.hero-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Different gradient */
+  background: linear-gradient(
+    135deg,
+    #00ffdd,
+    #ff00ff,
+    #ffcc00,
+    #00aaff,
+    #cc00ff
+  );
+  background-size: 500% 500%; /* Slightly different size */
+  /* Use same animation but maybe different timing/direction */
+  animation: lavaFlow 30s ease-in-out infinite alternate; /* Slower, different timing, alternates direction */
+  z-index: -1; /* Same z-index to blend with ::before */
+  filter: blur(80px); /* Slightly less blur than ::before */
+  opacity: 0.6; /* Slightly less opaque */
+}
+
+/* Keyframes for the animation */
+@keyframes lavaFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.white-header {
+  width: 100%;
+  background-color: white;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hero {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: transparent;
+  padding: 4rem 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.hero-logo-img {
+  height: 1.8rem;
+  width: auto;
+  display: block;
+}
+
+.hero-logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: lowercase;
+  color: #000;
+}
+
+.hero-content {
+  text-align: center;
+  max-width: 600px;
+  padding: 0 1rem;
+  margin-top: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: #eee;
+  margin-bottom: 0.5rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.hero-title {
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.hero-highlight {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border: 2px solid #fff;
+  border-radius: 0.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  font-size: 3rem;
+  transform: rotate(-5deg) translateY(0.5rem);
+  position: relative;
+  margin-bottom: 0.5rem;
+  z-index: 1;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.companion-text {
+  font-size: 4.5rem;
+  display: block;
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.hero-description {
+  font-size: 2rem;
+  color: #eee;
+  margin: 1.5rem 0 2.5rem;
+  max-width: 550px;
+  margin-left: auto;
+  margin-right: auto;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+/* New styles for partner/investor text */
+.hero-partner-text {
+  font-size: 1.1rem;
+  color: #fff;
+  margin-top: 2rem;
+  line-height: 1.6;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 600;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  letter-spacing: 0.5px;
+}

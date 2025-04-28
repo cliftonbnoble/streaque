@@ -1,0 +1,137 @@
+/* src/components/FootWaitlist.css */
+.fwl-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh; /* Adjust height as needed */
+  padding: 4rem 1.5rem;
+  overflow: hidden;
+  /* Background similar to Nia, adjust as needed */
+  background: linear-gradient(to bottom right, #ffffff, #fffaf4, #fef1f1);
+  text-align: center;
+}
+
+.fwl-content {
+  z-index: 10; /* Ensure content is above blurs */
+  position: relative;
+}
+
+.fwl-heading {
+  font-size: 1.5rem; /* Adjust size */
+  color: #374151; /* Dark gray */
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+
+@media (min-width: 768px) {
+  .fwl-heading {
+    font-size: 1.875rem; /* Larger on bigger screens */
+  }
+}
+
+.fwl-form {
+  display: flex;
+  justify-content: center;
+}
+
+.fwl-form-group {
+  display: inline-flex; /* Align input and button */
+  align-items: center;
+  border: 1px solid #d1d5db; /* Gray border */
+  border-radius: 9999px; /* Pill shape */
+  background-color: #ffffff; /* White background */
+  overflow: hidden; /* Clip corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.fwl-input {
+  border: none;
+  outline: none;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.9rem;
+  background: transparent;
+  min-width: 250px; /* Ensure input has some width */
+  color: #1f2937;
+}
+
+.fwl-input::placeholder {
+  color: #9ca3af;
+}
+
+.fwl-button {
+  border: none;
+  border-radius: 9999px; /* Fully rounded */
+  /* Green color like previous buttons */
+  background-color: #047857;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  white-space: nowrap; /* Prevent text wrapping */
+  /* Minor adjustment to align text vertically if needed */
+  line-height: 1.2;
+}
+
+.fwl-button:hover {
+  background-color: #059669;
+}
+
+.fwl-button:active {
+  background-color: #065f46;
+}
+
+/* Decorative Blurred Shapes */
+.fwl-blur-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.fwl-blur-bg1 {
+  position: absolute;
+  width: 50vw; /* Responsive width */
+  max-width: 700px;
+  height: 400px;
+  /* Gold/Yellow blur */
+  background-color: rgba(253, 230, 138, 0.3);
+  filter: blur(100px);
+  border-radius: 9999px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.fwl-blur-bg2 {
+  position: absolute;
+  width: 60vw; /* Responsive width */
+  max-width: 900px;
+  height: 600px;
+  /* Pink/Rose blur */
+  background-color: rgba(254, 205, 211, 0.4);
+  filter: blur(120px);
+  border-radius: 9999px;
+  top: 50%;
+  right: -10%;
+  transform: translateY(-50%);
+}
+
+/* Styles for waitlist status messages */
+.waitlist-message {
+  font-size: 0.875rem;
+  margin-top: 0.75rem;
+  text-align: center;
+}
+
+.waitlist-message.success {
+  color: #047857; /* Green */
+}
+
+.waitlist-message.error {
+  color: #dc2626; /* Red */
+}

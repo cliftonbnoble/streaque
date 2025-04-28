@@ -1,0 +1,398 @@
+/* src/components/ProductivitySection.css */
+.productivity-section {
+  background-color: #000;
+  color: #fff;
+  padding: 4rem 0 6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.productivity-content {
+  width: 100%;
+  max-width: 1280px;
+  padding: 0 1rem;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.productivity-heading {
+  font-size: 3rem;
+}
+
+.marquee-wrapper {
+  position: relative;
+  width: 100%;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+  height: 220px;
+}
+
+.marquees-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.marquee {
+  display: inline-block;
+  white-space: nowrap;
+  animation-name: scroll-slow;
+  animation-duration: 360s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  position: absolute;
+  width: max-content;
+  will-change: transform;
+}
+
+.issue-row-1 {
+  top: 15%;
+  transform: translateY(-50%);
+}
+
+.issue-row-2 {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.issue-row-3 {
+  top: 85%;
+  transform: translateY(-50%);
+}
+
+.solution-row {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@keyframes scroll-slow {
+  0% {
+    transform: translateX(-50%) translateY(-50%);
+  }
+  100% {
+    transform: translateX(0) translateY(-50%);
+  }
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  margin: 0 0.5rem;
+  font-size: 0.95rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  white-space: nowrap;
+}
+
+.issue {
+  background: #1e1e1e;
+  color: #aaa;
+}
+
+.solution {
+  /* background: linear-gradient(90deg, #fbd56e, #f09199); */ /* Old gradient */
+  /* background: linear-gradient(90deg, #a8e6cf, #aed9e0); */ /* Previous light green/blue gradient */
+  background: linear-gradient(
+    90deg,
+    #90ee90,
+    #87ceeb
+  ); /* Brighter green to sky blue gradient */
+  color: #000;
+  border: none;
+}
+
+.star-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.star-circle {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #b4f9cf 0%, #208958 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.05),
+    0 0 0 16px rgba(255, 255, 255, 0.05);
+  position: relative;
+  animation: pulse 2.5s infinite ease-in-out;
+}
+
+/* Add pseudo-elements for radiating bands */
+.star-circle::before,
+.star-circle::after {
+  content: "";
+  position: absolute;
+  left: -3px; /* Offset slightly for border */
+  top: -3px; /* Offset slightly for border */
+  right: -3px;
+  bottom: -3px;
+  border: 3px solid rgba(180, 249, 207, 0.6); /* Use light green from gradient, semi-transparent */
+  border-radius: 50%;
+  animation: radiate 2.5s infinite ease-out;
+  z-index: -1; /* Place behind the main circle */
+  opacity: 0; /* Start invisible until animation begins */
+}
+
+/* Stagger the second band */
+.star-circle::after {
+  animation-delay: 1.25s; /* Half of the animation duration */
+}
+
+/* Keyframes for the pulsing animation */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08); /* Increased scale for more drama */
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Keyframes for the radiating bands */
+@keyframes radiate {
+  0% {
+    transform: scale(1);
+    opacity: 0.6; /* Start visible */
+  }
+  80%,
+  100% {
+    /* Fade out and expand */
+    transform: scale(1.5); /* Control how far bands expand */
+    opacity: 0; /* Fade out completely */
+  }
+}
+
+/* Remove styles for the old SVG */
+/* 
+.star-svg {
+  color: #fff;
+}
+*/
+
+/* Add styles for the new logo image */
+.star-logo-img {
+  display: block; /* Remove extra space below image */
+  width: 75%; /* Adjust percentage to control size within circle */
+  height: 75%;
+  object-fit: contain; /* Scale image down to fit, preserving aspect ratio */
+  filter: drop-shadow(2px 3px 4px rgba(0, 0, 0, 0.4)); /* Added drop shadow */
+}
+
+/* --- Styles for the New Diagram --- */
+
+.diagram-outer-wrapper {
+  padding-top: 4rem; /* Add some space above the diagram */
+  padding-bottom: 4rem; /* Add some space below the diagram */
+}
+
+.diagram-container {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr; /* Flexible columns around center */
+  grid-template-rows: 1fr auto 1fr; /* Flexible rows around center */
+  grid-template-areas:
+    "tl arrow-t tr"
+    "arrow-l center arrow-r"
+    "bl arrow-b br";
+  gap: 2rem 3rem; /* Row gap, Column gap */
+  align-items: center; /* Vertically align items in grid cells */
+  justify-content: center; /* Horizontally align grid content */
+  max-width: 900px; /* Max width for the diagram */
+  margin: 0 auto; /* Center the diagram */
+  position: relative; /* For arrow positioning */
+}
+
+.diagram-center {
+  grid-area: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.center-box-ai,
+.center-box-generate {
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.center-box-ai {
+  background-color: white;
+  color: #2c3e50; /* Dark slate */
+  border: 1px solid #ccc;
+  margin-top: -1px; /* Overlap border slightly */
+  border-radius: 0.5rem 0.5rem 0rem 0rem; /* Bottom rounded */
+}
+
+.center-box-generate {
+  background-color: #2c3e50; /* Dark slate */
+  color: white;
+  border-radius: 0rem 0rem 0.5rem 0.5rem; /* Top rounded */
+}
+
+.diagram-box {
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 2px solid; /* Base border */
+  min-height: 180px; /* Ensure boxes have some height */
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* Space between elements inside box */
+}
+
+.diagram-box h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0; /* Adjust margin */
+}
+
+.diagram-box p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.diagram-icon-text {
+  display: flex;
+  align-items: flex-start; /* Align icon with first line of text */
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.diagram-icon-text svg {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0; /* Prevent icon shrinking */
+  margin-top: 0.1em; /* Fine-tune vertical alignment */
+}
+
+/* Assign grid areas and border colors */
+.box-tl {
+  grid-area: tl;
+  border-color: #4285f4; /* Blue */
+  color: #4285f4;
+}
+.box-tl svg {
+  color: #4285f4;
+}
+
+.box-tr {
+  grid-area: tr;
+  border-color: #34a853; /* Green */
+  color: #34a853;
+}
+.box-tr svg {
+  color: #34a853;
+}
+
+.box-bl {
+  grid-area: bl;
+  border-color: #5f6368; /* Grey */
+  color: #2c3e50; /* Dark text for contrast */
+  background-color: #fff; /* Added white background */
+}
+.box-bl svg {
+  color: #5f6368; /* Keep icon grey */
+}
+
+.box-br {
+  grid-area: br;
+  border-color: #fbbc05; /* Yellow */
+  color: #fbbc05;
+}
+.box-br svg {
+  color: #fbbc05;
+}
+
+/* Basic Arrow Styling (using pseudo-elements on container) */
+/* This is complex and might need SVG for better results */
+.diagram-container::before,
+.diagram-container::after {
+  content: "";
+  position: absolute;
+  background-color: #ccc; /* Arrow color */
+  z-index: -1;
+}
+
+/* Horizontal Arrows */
+.diagram-container::before {
+  left: 25%; /* Adjust positioning */
+  right: 25%;
+  top: 50%;
+  height: 2px;
+  transform: translateY(-1px);
+}
+
+/* Vertical Arrows */
+.diagram-container::after {
+  top: 25%;
+  bottom: 25%;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-1px);
+}
+
+/* Style individual arrow segments if using specific grid areas */
+
+/* --- REMOVE Old Feature Card Styles --- */
+/*
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 4rem;
+  align-items: stretch; 
+}
+
+.feature-card { ... }
+.feature-card-top { ... }
+.icon-background-circle { ... }
+.feature-icon-container { ... }
+.feature-icon-container svg { ... }
+.feature-card-bottom { ... }
+.feature-title { ... }
+.feature-description { ... }
+.feature-learn-more { ... }
+.feature-learn-more:hover { ... }
+*/
+
+/* Wrapper for issue rows, constrained to left 50% */
+.issue-rows-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%; /* Only occupy left half */
+  height: 100%;
+  overflow: hidden; /* Clip issue rows that scroll past this container's edge */
+  z-index: 1; /* Ensure issue rows are conceptually behind the star */
+}
+
+/* Wrapper for solution row, constrained to right 50% */
+.solution-row-wrapper {
+  position: absolute;
+  top: 0;
+  left: 50%; /* Start from horizontal center */
+  width: 50%; /* Only occupy right half */
+  height: 100%;
+  overflow: hidden; /* Clip solution row that scrolls past this container's edge */
+  z-index: 1; /* Keep on same layer as issue wrapper */
+}
