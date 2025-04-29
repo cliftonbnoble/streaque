@@ -31,7 +31,7 @@ export function Hero() {
         <div className="hero-content">
           {/* <h2 className="hero-subtitle">Introducing</h2> */}
           <h1 className="hero-title">
-            <span className="hero-highlight stamp">Streaque</span>
+            <span className="hero-highlight stamp">NiaCoach</span>
           </h1>
           <p className="hero-description">
             {randomTagline}

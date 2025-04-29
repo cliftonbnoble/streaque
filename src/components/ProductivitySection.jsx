@@ -108,6 +108,14 @@ function shuffleArray(array) {
   return array;
 }
 
+// Added Student Icon
+const StudentIcon = () => (
+  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="7" r="4"></circle>
+    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+  </svg>
+);
+
 // --- New Icons for Diagram --- 
 const SparkleIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -121,10 +129,10 @@ const ChatBubbleIcon = () => (
   </svg>
 );
 
+// Updated Handshake Icon
 const HandshakeIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M16 8.44a4 4 0 0 0-5.66 0l-2.83 2.83a4 4 0 1 0 5.66 5.66l2.83-2.83a4 4 0 0 0 0-5.66z"/>
-    <path d="M8 15.56a4 4 0 0 0 5.66 0l2.83-2.83a4 4 0 1 0-5.66-5.66l-2.83 2.83a4 4 0 0 0 0 5.66z"/>
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
   </svg>
 );
 
@@ -207,7 +215,7 @@ export default function ProductivitySection() {
           <div className="diagram-box box-tl">
             <h4>Personalized Support. Proactive Insights. Powered by AI</h4>
             <div className="diagram-icon-text">
-              <SparkleIcon />
+              <StudentIcon />
               <p>AI That Understands Students—And Empowers Staff</p>
             </div>
           </div>
@@ -215,8 +223,11 @@ export default function ProductivitySection() {
           {/* Top Right Box */}
           <div className="diagram-box box-tr">
             <h4>Unifying Student Success with Intelligent Support</h4>
-            <p>The AI-Powered Ecosystem for Holistic Student Support</p>
-            <p>Student Success, Simplified and Streamlined</p>
+            <div className="diagram-icon-text">
+              <GraduationCapIcon />
+              <p>The AI-Powered Ecosystem for Holistic Student Support</p>
+            </div>
+            {/* <p>Student Success, Simplified and Streamlined</p> */}
           </div>
 
           {/* Bottom Left Box */}
@@ -224,7 +235,7 @@ export default function ProductivitySection() {
              <h4>Your Partner in Student Success.</h4>
              <div className="diagram-icon-text">
                <ChatBubbleIcon />
-               <p>Your Partner in Student Success.</p>
+               <p>Student Success, Simplified and Streamlined</p>
              </div>
           </div>
 

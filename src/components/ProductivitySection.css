@@ -278,8 +278,8 @@
 }
 
 .diagram-icon-text svg {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   flex-shrink: 0; /* Prevent icon shrinking */
   margin-top: 0.1em; /* Fine-tune vertical alignment */
 }
@@ -313,6 +313,12 @@
   color: #5f6368; /* Keep icon grey */
 }
 
+/* Make chat bubble icon larger */
+.box-bl .diagram-icon-text svg {
+  width: 32px;
+  height: 32px;
+}
+
 .box-br {
   grid-area: br;
   border-color: #fbbc05; /* Yellow */
@@ -320,6 +326,12 @@
 }
 .box-br svg {
   color: #fbbc05;
+}
+
+/* Make handshake icon larger */
+.box-br .diagram-icon-text svg {
+  width: 32px;
+  height: 32px;
 }
 
 /* Basic Arrow Styling (using pseudo-elements on container) */
@@ -348,6 +360,38 @@
   left: 50%;
   width: 2px;
   transform: translateX(-1px);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .diagram-container {
+    grid-template-columns: 1fr; /* Single column */
+    grid-template-rows: auto; /* Rows adjust to content */
+    grid-template-areas:
+      "tl"
+      "tr"
+      "center"
+      "bl"
+      "br";
+    gap: 1.5rem; /* Reduce gap for stacked layout */
+    max-width: 95%; /* Allow it to take more width on smaller screens */
+    padding: 0 1rem; /* Add some padding */
+  }
+
+  .diagram-box {
+    min-height: auto; /* Remove fixed min-height */
+    padding: 1rem; /* Slightly reduce padding */
+  }
+
+  .diagram-center {
+    margin: 1rem 0; /* Add some margin around the center element */
+  }
+
+  /* Hide the pseudo-element arrows */
+  .diagram-container::before,
+  .diagram-container::after {
+    display: none;
+  }
 }
 
 /* Style individual arrow segments if using specific grid areas */
