@@ -100,9 +100,11 @@
   /* background: linear-gradient(90deg, #fbd56e, #f09199); */ /* Old gradient */
   /* background: linear-gradient(90deg, #a8e6cf, #aed9e0); */ /* Previous light green/blue gradient */
   background: linear-gradient(
-    90deg,
+    120deg,
+    #fff,
     #90ee90,
-    #87ceeb
+    #9dbef2,
+    #4ac2f1
   ); /* Brighter green to sky blue gradient */
   color: #000;
   border: none;
@@ -126,7 +128,7 @@
   align-items: center;
   justify-content: center;
   box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.05),
-    0 0 0 16px rgba(255, 255, 255, 0.05);
+    0 0 0 16px rgba(0, 0, 0, 0.15);
   position: relative;
   animation: pulse 2.5s infinite ease-in-out;
 }
@@ -305,12 +307,13 @@
 
 .box-bl {
   grid-area: bl;
-  border-color: #5f6368; /* Grey */
-  color: #2c3e50; /* Dark text for contrast */
-  background-color: #fff; /* Added white background */
+  border-color: #fff; /* Changed to white */
+  color: #fff; /* Changed to white */
+  /* background-color: #fff; Removed white background */
 }
 .box-bl svg {
-  color: #5f6368; /* Keep icon grey */
+  color: #fff; /* Make icon white */
+  stroke-width: 1.8; /* Make icon slightly bolder */
 }
 
 /* Make chat bubble icon larger */

@@ -98,8 +98,8 @@
   width: 50vw; /* Responsive width */
   max-width: 700px;
   height: 400px;
-  /* Gold/Yellow blur */
-  background-color: rgba(253, 230, 138, 0.3);
+  /* Light Green blur */
+  background-color: rgba(144, 238, 144, 0.3); /* Light green */
   filter: blur(100px);
   border-radius: 9999px;
   top: 50%;
@@ -112,8 +112,8 @@
   width: 60vw; /* Responsive width */
   max-width: 900px;
   height: 600px;
-  /* Pink/Rose blur */
-  background-color: rgba(254, 205, 211, 0.4);
+  /* Light Blue blur */
+  background-color: rgba(173, 216, 230, 0.4); /* Light blue */
   filter: blur(120px);
   border-radius: 9999px;
   top: 50%;

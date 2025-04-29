@@ -62,7 +62,7 @@ const FootWaitlist = () => {
   return (
     <section className="fwl-section" id="waitlist">
       <div className="fwl-content">
-        <h2 className="fwl-heading">Join our early access waitlist</h2>
+        <h2 className="fwl-heading">Join our early access or Investment</h2>
         <form className="fwl-form" onSubmit={handleSubmit}>
           <div className="fwl-form-group">
             <input

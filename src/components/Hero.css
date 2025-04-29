@@ -20,12 +20,15 @@
   bottom: 0;
   background: linear-gradient(
     45deg,
-    #ff8a00,
-    #e52e71,
-    #9c27b0,
+    #8000ff,
+    transparent,
     #2196f3,
+    transparent,
     #4caf50,
-    #ffeb3b
+    transparent,
+    #ffeb3b,
+    transparent,
+    white
   );
   background-size: 400% 400%;
   animation: lavaFlow 25s ease infinite;
@@ -42,21 +45,19 @@
   left: 0;
   right: 0;
   bottom: 0;
-  /* Different gradient */
   background: linear-gradient(
     135deg,
     #00ffdd,
-    #ff00ff,
+    transparent,
     #ffcc00,
     #00aaff,
-    #cc00ff
+    transparent
   );
-  background-size: 500% 500%; /* Slightly different size */
-  /* Use same animation but maybe different timing/direction */
-  animation: lavaFlow 30s ease-in-out infinite alternate; /* Slower, different timing, alternates direction */
-  z-index: -1; /* Same z-index to blend with ::before */
-  filter: blur(80px); /* Slightly less blur than ::before */
-  opacity: 0.6; /* Slightly less opaque */
+  background-size: 500% 500%;
+  animation: lavaFlow 30s ease-in-out infinite alternate;
+  z-index: -1;
+  filter: blur(80px);
+  opacity: 0.6;
 }
 
 /* Keyframes for the animation */
