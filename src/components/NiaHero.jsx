@@ -1,23 +1,22 @@
 import React, { useEffect, useRef } from 'react';
-// Remove Three.js import - will use global window.THREE
-// import * as THREE from 'three'; 
-// Remove Vanta NET import - will use global window.VANTA.NET
-// import NET from 'vanta/dist/vanta.net.min.js'; 
+import * as THREE from 'three';
+// Removed import for CustomWavesEffect
 import streaqueLogo from '../assets/streaque-logo.png'; // Header logo
 import niaHeroLogo from '../assets/nia-hero-logo.png'; // Import the Nia hero logo
 
 export default function NiaHero() {
-  const vantaEffectRef = useRef(null);
-  const vantaContainerRef = useRef(null);
+  // Refs remain the same
+  const vantaRef = useRef(null);
+  const vantaInstance = useRef(null);
 
   useEffect(() => {
-    // Check if VANTA and THREE are loaded on the window
-    if (!vantaEffectRef.current && vantaContainerRef.current && window.VANTA && window.THREE) { 
+    // Revert to checking window.VANTA and initialize using it
+    if (vantaRef.current && window.VANTA && !vantaInstance.current) {
       try {
-        // Use window.VANTA.NET and remove THREE parameter
-        vantaEffectRef.current = window.VANTA.NET({ 
-          el: vantaContainerRef.current,
-          // THREE: THREE, // Remove: Vanta will use window.THREE
+        // console.log("Vanta Target Element:", vantaRef.current); // Optional: Keep for debugging
+        vantaInstance.current = window.VANTA.CELLS({
+          el: vantaRef.current,       
+          THREE: THREE, // Pass the imported THREE
           mouseControls: true,
           touchControls: true,
           gyroControls: false,
@@ -25,24 +24,29 @@ export default function NiaHero() {
           minWidth: 200.00,
           scale: 1.00,
           scaleMobile: 1.00,
-          color: 0xffd13f,        // Recommended color
-          backgroundColor: 0x23153c, // Keep background
-          points: 7.00,         // Updated points
-          maxDistance: 40.00,   // Updated maxDistance
-          spacing: 13.00        // Updated spacing
+          // Add CELLS specific options (using updated colors)
+          color1: 0x8c8c,   // New light gray color
+          color2: 0xf2e735, // New light yellow color
+          size: 3.00,      // Example size
+          // Removed WAVES specific options: color, backgroundColor, shininess, waveHeight, waveSpeed, zoom
         });
+
+        // Removed post-initialization color setting block
+
       } catch (error) {
         console.error('Error initializing Vanta:', error);
       }
     }
 
+    // Cleanup method remains the same
     return () => {
-      if (vantaEffectRef.current) {
-        vantaEffectRef.current.destroy();
-        vantaEffectRef.current = null;
+      // Check if destroy exists before calling
+      if (vantaInstance.current && typeof vantaInstance.current.destroy === 'function') {
+          vantaInstance.current.destroy();
       }
+      vantaInstance.current = null; 
     };
-  }, []);
+  }, []); 
 
   // --- Styles ---
 
@@ -204,8 +208,8 @@ export default function NiaHero() {
         </div>
       </header>
 
-      {/* Vanta Canvas Container */}
-      <div ref={vantaContainerRef} style={vantaBackgroundStyle}></div>
+      {/* Vanta Canvas Container - Attach renamed ref */}
+      <div ref={vantaRef} style={vantaBackgroundStyle}></div>
 
       {/* Hero Content Container */}
       <div style={contentStyle}>
