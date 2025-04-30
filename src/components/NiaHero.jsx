@@ -10,12 +10,11 @@ export default function NiaHero() {
   const vantaInstance = useRef(null);
 
   useEffect(() => {
-    // Revert to checking window.VANTA and initialize using it
+    // Initialize using window.VANTA.RINGS
     if (vantaRef.current && window.VANTA && !vantaInstance.current) {
       try {
-        // console.log("Vanta Target Element:", vantaRef.current); // Optional: Keep for debugging
-        vantaInstance.current = window.VANTA.CELLS({
-          el: vantaRef.current,       
+        vantaInstance.current = window.VANTA.RINGS({
+          el: vantaRef.current,
           THREE: THREE, // Pass the imported THREE
           mouseControls: true,
           touchControls: true,
@@ -24,29 +23,24 @@ export default function NiaHero() {
           minWidth: 200.00,
           scale: 1.00,
           scaleMobile: 1.00,
-          // Add CELLS specific options (using updated colors)
-          color1: 0x8c8c,   // New light gray color
-          color2: 0xf2e735, // New light yellow color
-          size: 3.00,      // Example size
-          // Removed WAVES specific options: color, backgroundColor, shininess, waveHeight, waveSpeed, zoom
+          // Add RINGS specific options
+          backgroundColor: 0x23153c,  // Dark purple background
+          // color: 0xffffff // Default is white, can adjust if needed
         });
-
-        // Removed post-initialization color setting block
-
+        // console.log("Initialized window.VANTA.RINGS");
       } catch (error) {
         console.error('Error initializing Vanta:', error);
       }
     }
 
-    // Cleanup method remains the same
+    // Cleanup method
     return () => {
-      // Check if destroy exists before calling
       if (vantaInstance.current && typeof vantaInstance.current.destroy === 'function') {
           vantaInstance.current.destroy();
       }
-      vantaInstance.current = null; 
+      vantaInstance.current = null;
     };
-  }, []); 
+  }, []);
 
   // --- Styles ---
 
@@ -56,7 +50,7 @@ export default function NiaHero() {
     minHeight: '100vh', // Full viewport height
     overflow: 'hidden',
     color: 'white',
-    background: '#000', // Ensure section background is black
+    background: '#23153c', // Changed background to dark purple
     display: 'flex',     // Use flex to help center content vertically
     flexDirection: 'column',
     alignItems: 'center', // Center horizontally
