@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import streaqueLogo from '../assets/streaque-logo.png'; // Header logo
 import niaHeroLogo from '../assets/nia-hero-logo.png'; // Import the Nia hero logo
 
-export default function NiaHero() {
+export default function NiaHero({ onJoinWaitlistClick }) {
   // Refs remain the same
   const vantaRef = useRef(null);
   const vantaInstance = useRef(null);
@@ -24,8 +24,8 @@ export default function NiaHero() {
           scale: 1.00,
           scaleMobile: 1.00,
           // Add RINGS specific options
-          backgroundColor: 0x23153c,  // Dark purple background
-          // color: 0xffffff // Default is white, can adjust if needed
+          backgroundColor: 0x000000, // Set background to black
+          color: 0x00ffff // Change rings color to cyan for better contrast
         });
         // console.log("Initialized window.VANTA.RINGS");
       } catch (error) {
@@ -50,7 +50,7 @@ export default function NiaHero() {
     minHeight: '100vh', // Full viewport height
     overflow: 'hidden',
     color: 'white',
-    background: '#23153c', // Changed background to dark purple
+    background: '#000000', // Restore background color to black
     display: 'flex',     // Use flex to help center content vertically
     flexDirection: 'column',
     alignItems: 'center', // Center horizontally
@@ -96,7 +96,7 @@ export default function NiaHero() {
     justifyContent: 'center',
     borderRadius: '9999px', // rounded-full
     border: '1px solid rgba(255, 255, 255, 0.3)', // Slightly visible white border
-    backgroundColor: 'rgba(255, 255, 255, 0.05)', // Very subtle background
+    // backgroundColor: 'rgba(255, 255, 255, 0.05)', // Removed background color
     padding: '0.5rem 1.5rem', // Adjust padding
     fontSize: '0.9rem', // text-sm approx
     fontWeight: 500, // font-medium
@@ -139,8 +139,8 @@ export default function NiaHero() {
     lineHeight: 1, // Set line height to minimize extra space
     border: '2px solid #fff', // White border
     borderRadius: '0.5rem', // Rounded corners
-    backgroundColor: 'rgba(0, 0, 0, 0.2)', // Semi-transparent black background
-    fontSize: '1.8rem', // Increased font size (was 1.5rem)
+    // backgroundColor: 'rgba(0, 0, 0, 0.2)', // Removed background color
+    fontSize: '2.2rem', // Increased font size (was 1.8rem)
     fontWeight: 600, // Slightly bold
     color: '#fff',
     transform: 'rotate(-12deg)', // Keep rotation
@@ -171,7 +171,7 @@ export default function NiaHero() {
     justifyContent: 'center',
     gap: '0.5rem',
     borderRadius: '9999px', // rounded-full
-    backgroundColor: 'rgba(0, 0, 0, 0.1)', // Subtle dark background
+    // backgroundColor: 'rgba(0, 0, 0, 0.1)', // Removed background color
     padding: '0.75rem 2rem', // px-8 py-3
     fontSize: '1rem', // text-base
     fontWeight: 500, // font-medium
@@ -197,7 +197,7 @@ export default function NiaHero() {
           <img src={streaqueLogo} alt="Streaque Logo" style={logoImageStyle} />
         </div>
         <div>
-          <button style={navButtonStyle}>Join Waitlist</button>
+          <button style={navButtonStyle} onClick={onJoinWaitlistClick}>Join Waitlist</button>
           {/* <button style={navButtonStyle}>Log In</button> */}
         </div>
       </header>

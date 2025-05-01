@@ -102,9 +102,9 @@
   background: linear-gradient(
     120deg,
     #fff,
-    #90ee90,
-    #9dbef2,
-    #4ac2f1
+    #8bc4d5,
+    #3e9dc9,
+    #706bbf
   ); /* Brighter green to sky blue gradient */
   color: #000;
   border: none;
@@ -123,7 +123,12 @@
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  background: radial-gradient(circle, #b4f9cf 0%, #208958 100%);
+  background: radial-gradient(
+    circle,
+    #8bc4d5 0%,
+    #3e9dc9 50%,
+    #706bbf 100%
+  ); /* Updated gradient */
   display: flex;
   align-items: center;
   justify-content: center;

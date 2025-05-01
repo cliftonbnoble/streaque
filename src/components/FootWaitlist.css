@@ -2,136 +2,72 @@
 .fwl-section {
   position: relative;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: 50vh; /* Adjust height as needed */
-  padding: 4rem 1.5rem;
+  min-height: 150px;
+  padding: 4rem 3rem 3rem;
   overflow: hidden;
-  /* Background similar to Nia, adjust as needed */
-  background: linear-gradient(to bottom right, #ffffff, #fffaf4, #fef1f1);
-  text-align: center;
+  background: #000;
 }
 
 .fwl-content {
-  z-index: 10; /* Ensure content is above blurs */
-  position: relative;
-}
-
-.fwl-heading {
-  font-size: 1.5rem; /* Adjust size */
-  color: #374151; /* Dark gray */
-  margin-bottom: 2rem;
-  font-weight: 500;
-}
-
-@media (min-width: 768px) {
-  .fwl-heading {
-    font-size: 1.875rem; /* Larger on bigger screens */
-  }
-}
-
-.fwl-form {
   display: flex;
+  flex-direction: row;
   justify-content: center;
-}
-
-.fwl-form-group {
-  display: inline-flex; /* Align input and button */
   align-items: center;
-  border: 1px solid #d1d5db; /* Gray border */
-  border-radius: 9999px; /* Pill shape */
-  background-color: #ffffff; /* White background */
-  overflow: hidden; /* Clip corners */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
-.fwl-input {
-  border: none;
-  outline: none;
-  padding: 0.75rem 1.25rem;
-  font-size: 0.9rem;
-  background: transparent;
-  min-width: 250px; /* Ensure input has some width */
-  color: #1f2937;
-}
-
-.fwl-input::placeholder {
-  color: #9ca3af;
+.fwl-logo {
+  position: absolute;
+  left: 3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 48px;
+  width: auto;
+  display: block;
+  z-index: 2;
 }
 
 .fwl-button {
-  border: none;
-  border-radius: 9999px; /* Fully rounded */
-  /* Green color like previous buttons */
-  background-color: #047857;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 25px;
+  background: transparent;
   color: white;
-  padding: 0.75rem 1.5rem;
-  font-size: 0.9rem;
+  padding: 0.6rem 1.8rem;
+  font-size: 0.95rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s;
-  white-space: nowrap; /* Prevent text wrapping */
-  /* Minor adjustment to align text vertically if needed */
+  transition: background-color 0.2s, border-color 0.2s;
+  white-space: nowrap;
   line-height: 1.2;
 }
 
 .fwl-button:hover {
-  background-color: #059669;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.7);
 }
 
 .fwl-button:active {
-  background-color: #065f46;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.9);
 }
 
-/* Decorative Blurred Shapes */
-.fwl-blur-container {
+.fwl-separator {
   position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 0;
-}
-
-.fwl-blur-bg1 {
-  position: absolute;
-  width: 50vw; /* Responsive width */
-  max-width: 700px;
-  height: 400px;
-  /* Light Green blur */
-  background-color: rgba(144, 238, 144, 0.3); /* Light green */
-  filter: blur(100px);
-  border-radius: 9999px;
-  top: 50%;
+  top: 1.5rem;
   left: 0;
-  transform: translateY(-50%);
-}
-
-.fwl-blur-bg2 {
-  position: absolute;
-  width: 60vw; /* Responsive width */
-  max-width: 900px;
-  height: 600px;
-  /* Light Blue blur */
-  background-color: rgba(173, 216, 230, 0.4); /* Light blue */
-  filter: blur(120px);
-  border-radius: 9999px;
-  top: 50%;
-  right: -10%;
-  transform: translateY(-50%);
-}
-
-/* Styles for waitlist status messages */
-.waitlist-message {
-  font-size: 0.875rem;
-  margin-top: 0.75rem;
-  text-align: center;
-}
-
-.waitlist-message.success {
-  color: #047857; /* Green */
-}
-
-.waitlist-message.error {
-  color: #dc2626; /* Red */
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.2) 20%,
+    rgba(255, 255, 255, 0.2) 80%,
+    transparent
+  );
+  z-index: 0;
 }
