@@ -1,6 +1,9 @@
 import React from 'react';
 import './ProductivitySection.css';
 import streaqueLogoS from '../assets/S-logo-300.png'; // Import the logo
+// Import the new images
+import niaStudentBackground from '../assets/nia-student-background.jpg';
+import niaFaculty from '../assets/nia-faculty.jpg';
 
 const issues = [
   'Limited communication',
@@ -207,11 +210,10 @@ export default function ProductivitySection() {
         </div>
       </div>
 
-      {/* Centered Content Wrapper for the Diagram */}
+      {/* Centered Content Wrapper for the Diagram - COMMENTED OUT */}
+      {/* 
       <div className="productivity-content diagram-outer-wrapper">
-        {/* Add Diagram JSX here */}
         <div className="diagram-container">
-          {/* Top Left Box */}
           <div className="diagram-box box-tl">
             <h4>Personalized Support. Proactive Insights. Powered by AI</h4>
             <div className="diagram-icon-text">
@@ -220,17 +222,14 @@ export default function ProductivitySection() {
             </div>
           </div>
 
-          {/* Top Right Box */}
           <div className="diagram-box box-tr">
             <h4>Unifying Student Success with Intelligent Support</h4>
             <div className="diagram-icon-text">
               <GraduationCapIcon />
               <p>The AI-Powered Ecosystem for Holistic Student Support</p>
             </div>
-            {/* <p>Student Success, Simplified and Streamlined</p> */}
           </div>
 
-          {/* Bottom Left Box */}
           <div className="diagram-box box-bl">
              <h4>Your Partner in Student Success.</h4>
              <div className="diagram-icon-text">
@@ -239,7 +238,6 @@ export default function ProductivitySection() {
              </div>
           </div>
 
-          {/* Bottom Right Box */}
           <div className="diagram-box box-br">
             <h4>Smarter Engagement. Better Outcomes.</h4>
             <p>From Insight to Action—AI That Cares.</p>
@@ -249,16 +247,38 @@ export default function ProductivitySection() {
              </div>
           </div>
 
-          {/* Center Element */}
           <div className="diagram-center">
             <div className="center-box-ai">NiaCoach</div>
             <div className="center-box-generate">AI</div>
           </div>
+        </div>
+      </div> 
+      */}
 
-          {/* Arrows (can be added with CSS pseudo-elements or SVG later) */}
-          {/* <div className="diagram-arrows"> ... </div> */}
+      {/* New Image Split Section */}
+      <div className="image-split-section">
+        <div className="image-container image-container-left">
+          <img src={niaStudentBackground} alt="Student focused background" className="split-image" />
+          {/* Text Overlay for Left Image */}
+          <div className="text-overlay text-overlay-left">
+            <h1>Nia For Students</h1>
+            <p>Personalized Support. Proactive Insights. Powered by AI</p>
+            <p>Student Success, Simplified and Streamlined</p>
+            <p>Smarter Engagement. Better Outcomes. From Insight to Action.</p>
+          </div>
+        </div>
+        <div className="image-container image-container-right">
+          <img src={niaFaculty} alt="Faculty focused background" className="split-image" />
+          {/* Text Overlay for Right Image */}
+          <div className="text-overlay text-overlay-right">
+            <h1>Nia For Faculty & Staff</h1>
+            <p>The AI-Powered Ecosystem for Holistic Student Support</p>
+            <p>Real-Time Help for Students. Real Impact for Institutions.</p>
+            <p>AI That Understands Students—And Empowers Staff</p>
+          </div>
         </div>
       </div>
+
     </section>
   );
 } 

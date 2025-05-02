@@ -3,6 +3,7 @@ import * as THREE from 'three';
 // Removed import for CustomWavesEffect
 import streaqueLogo from '../assets/streaque-logo.png'; // Header logo
 import niaHeroLogo from '../assets/nia-hero-logo.png'; // Import the Nia hero logo
+import './FootWaitlist.css'; // Import the CSS for the button style
 
 export default function NiaHero({ onJoinWaitlistClick }) {
   // Refs remain the same
@@ -90,23 +91,6 @@ export default function NiaHero({ onJoinWaitlistClick }) {
     width: 'auto',
   };
 
-  const navButtonStyle = {
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: '9999px', // rounded-full
-    border: '1px solid rgba(255, 255, 255, 0.3)', // Slightly visible white border
-    // backgroundColor: 'rgba(255, 255, 255, 0.05)', // Removed background color
-    padding: '0.5rem 1.5rem', // Adjust padding
-    fontSize: '0.9rem', // text-sm approx
-    fontWeight: 500, // font-medium
-    color: 'white',
-    marginLeft: '1rem', // Space between buttons
-    cursor: 'pointer',
-    transition: 'background-color 0.2s ease, border-color 0.2s ease',
-    // Add hover effect if desired (e.g., slightly brighter background/border)
-  };
-
   const contentStyle = {
     position: 'relative',
     zIndex: 1, // Above Vanta background
@@ -122,7 +106,7 @@ export default function NiaHero({ onJoinWaitlistClick }) {
 
   const h1Style = {
     fontWeight: 700, // font-bold
-    marginBottom: '1.5rem', // mb-6 - Adjusted spacing
+    marginBottom: '0.5rem', // mb-6 - Reduced spacing
     lineHeight: 1.2, // Adjust line height
     color: 'white', // Fallback
     display: 'flex', // Use flexbox for layout
@@ -154,38 +138,16 @@ export default function NiaHero({ onJoinWaitlistClick }) {
     height: '12rem', // Reduced height (was 24rem)
     width: 'auto',
     display: 'block',
+    filter: 'drop-shadow(0 0 1px white) drop-shadow(0 0 1px white)', // Added thin white outline
   };
 
   const pStyle = {
     maxWidth: '640px', // max-w-xl
-    fontSize: '1.125rem', // text-lg
+    fontSize: '1.25rem', // text-lg
     lineHeight: '1.75', // leading-relaxed approx
-    color: '#d1d5db', // text-neutral-300 approx
-    marginBottom: '2.5rem', // mb-10
-  };
-
-  // Renamed style object for the button
-  const meetNiaStyle = {
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: '0.5rem',
-    borderRadius: '9999px', // rounded-full
-    // backgroundColor: 'rgba(0, 0, 0, 0.1)', // Removed background color
-    padding: '0.75rem 2rem', // px-8 py-3
-    fontSize: '1rem', // text-base
-    fontWeight: 500, // font-medium
-    color: '#fff', // Changed text color to white
-    border: '1px solid rgba(255, 255, 255, 0.2)', // Subtle border
-    cursor: 'pointer',
-    transition: 'background-color 0.2s ease, border-color 0.2s ease',
-  };
-
-  const svgStyle = {
-      width: '16px',
-      height: '16px',
-      flexShrink: 0,
-      stroke: '#fff', // Changed stroke to white to match button text
+    color: '#ffffff', // Changed to bright white
+    fontWeight: 700, // Added bold font weight
+    marginBottom: '1.5rem', // Reduced bottom margin (was 2.5rem)
   };
 
   return (
@@ -197,8 +159,7 @@ export default function NiaHero({ onJoinWaitlistClick }) {
           <img src={streaqueLogo} alt="Streaque Logo" style={logoImageStyle} />
         </div>
         <div>
-          <button style={navButtonStyle} onClick={onJoinWaitlistClick}>Join Waitlist</button>
-          {/* <button style={navButtonStyle}>Log In</button> */}
+          <button className="fwl-button" onClick={onJoinWaitlistClick}>Join Waitlist</button>
         </div>
       </header>
 
@@ -213,25 +174,23 @@ export default function NiaHero({ onJoinWaitlistClick }) {
         </h1>
 
         <p style={pStyle}>
-        AI-driven support that students trust 
-          <br />
-          — and staff rely on.
+        AI-driven support that students trust and staff rely on.
         </p>
 
-        <button style={meetNiaStyle}>
+        <button className="fwl-button meet-nia-button">
           Meet Nia
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth="2" // Use strokeWidth attribute
-            // stroke="currentColor" // Remove, applied via style
-            style={svgStyle}
+            strokeWidth="2"
+            stroke="currentColor"
+            style={{ width: '16px', height: '16px', flexShrink: 0, marginLeft: '0.5rem' }}
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" // Standard right arrow path
+              d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
             />
           </svg>
         </button>

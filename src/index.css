@@ -69,3 +69,8 @@ h1 {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Add hover effect for the Meet Nia button */
+.meet-nia-button:hover {
+  background-color: rgba(0, 0, 0, 0.2); /* Darker transparent gray background */
+}

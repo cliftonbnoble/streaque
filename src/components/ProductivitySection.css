@@ -448,3 +448,62 @@
   overflow: hidden; /* Clip solution row that scrolls past this container's edge */
   z-index: 1; /* Keep on same layer as issue wrapper */
 }
+
+/* --- New Image Split Section Styles --- */
+.image-split-section {
+  display: flex;
+  width: 100%;
+  margin-top: 4rem; /* Add some space above */
+  padding: 0 2rem; /* Add horizontal padding for buffer */
+  gap: 2rem; /* Add gap between the two image containers */
+  box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+.image-container {
+  flex: 1; /* Each container takes half the space */
+  position: relative; /* For potential overlay content later */
+  overflow: hidden; /* Ensure shadow doesn't cause overflow issues */
+}
+
+.split-image {
+  display: block; /* Remove extra space below image */
+  width: 100%;
+  height: auto; /* Maintain aspect ratio */
+  box-shadow: 0 0 25px 8px rgba(0, 0, 0, 0.75); /* Black box shadow */
+}
+
+/* --- Text Overlay Styles --- */
+.text-overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%; /* Take full width of container */
+  padding: 3rem 1.5rem 2rem; /* Top, H, Bottom padding */
+  background-color: #0b3d4f; /* Dark teal/blue color */
+  color: white;
+  box-sizing: border-box;
+}
+
+.text-overlay-left {
+  left: 0;
+  /* Slant goes up towards the right */
+  clip-path: polygon(0 0, 100% 35%, 100% 100%, 0% 100%);
+}
+
+.text-overlay-right {
+  right: 0;
+  /* Slant goes up towards the left */
+  clip-path: polygon(0 35%, 100% 0, 100% 100%, 0% 100%);
+}
+
+.text-overlay h1 {
+  font-size: 1.8rem; /* Adjust as needed */
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.2;
+}
+
+.text-overlay p {
+  font-size: 1rem; /* Adjust as needed */
+  line-height: 1.5;
+  margin: 0;
+}
