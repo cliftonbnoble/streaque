@@ -15,7 +15,7 @@ const FootWaitlist = ({ onJoinWaitlistClick }) => {
           className="fwl-button"
           onClick={onJoinWaitlistClick}
         >
-          Join Waitlist
+          Secure Early Access
         </button>
       </div>
     </footer>

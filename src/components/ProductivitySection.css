@@ -196,10 +196,12 @@
 /* Add styles for the new logo image */
 .star-logo-img {
   display: block; /* Remove extra space below image */
-  width: 75%; /* Adjust percentage to control size within circle */
-  height: 75%;
+  width: 85%; /* Adjust percentage to control size within circle */
+  height: 85%;
   object-fit: contain; /* Scale image down to fit, preserving aspect ratio */
-  filter: drop-shadow(2px 3px 4px rgba(0, 0, 0, 0.4)); /* Added drop shadow */
+  /* Combine existing shadow with new white stroke shadows */
+  filter: drop-shadow(0 0 1px white) drop-shadow(0 0 1px white)
+    drop-shadow(0 0 1px white) drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.4));
 }
 
 /* --- Styles for the New Diagram --- */

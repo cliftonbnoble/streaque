@@ -1,6 +1,6 @@
 import React from 'react';
 import './ProductivitySection.css';
-import streaqueLogoS from '../assets/S-logo-300.png'; // Import the logo
+import niaHeroLogo from '../assets/nia-hero-logo.png'; // Import the new logo
 // Import the new images
 import niaStudentBackground from '../assets/nia-student-background.jpg';
 import niaFaculty from '../assets/nia-faculty.jpg';
@@ -161,7 +161,7 @@ export default function ProductivitySection() {
     <section className="productivity-section">
       {/* Centered Content Wrapper */}
       <div className="productivity-content">
-        <h2 className="productivity-heading">Supercharge Student and Staff Productivity</h2>
+        <h2 className="productivity-heading">Two tools. One AI. Infinite Impact.</h2>
       </div>
 
       <div className="marquee-wrapper">
@@ -201,10 +201,10 @@ export default function ProductivitySection() {
         {/* Star remains in the center */}
         <div className="star-container">
           <div className="star-circle">
-            <img 
-              src={streaqueLogoS} 
-              alt="Streaque S Logo" 
-              className="star-logo-img" 
+            <img
+              src={niaHeroLogo}
+              alt="Nia Hero Logo"
+              className="star-logo-img"
             />
           </div>
         </div>

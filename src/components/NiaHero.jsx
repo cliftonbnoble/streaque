@@ -1,14 +1,26 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 // Removed import for CustomWavesEffect
 import streaqueLogo from '../assets/streaque-logo.png'; // Header logo
 import niaHeroLogo from '../assets/nia-hero-logo.png'; // Import the Nia hero logo
-import './FootWaitlist.css'; // Import the CSS for the button style
+import './NiaHero.css'; // Import the new CSS file
+
+const sentences = [
+  "The AI partner transforming student success and staff workflows.",
+  "Smarter support. Stronger students. Empowered staff.",
+  "Your AI-powered solution for student success and staff efficiency.",
+  "One AI. Two Missions: Transform Student Success. Amplify Staff Impact.",
+  "One AI. Two Missions: Unleash Student Potential. Empower Staff Excellence.",
+  "AI-driven support that students trust and staff rely on.",
+  "The AI co-pilot unifying student support and supercharging staff efficiency"
+];
 
 export default function NiaHero({ onJoinWaitlistClick }) {
   // Refs remain the same
   const vantaRef = useRef(null);
   const vantaInstance = useRef(null);
+  const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
+  const [isFadingOut, setIsFadingOut] = useState(false); // State for animation
 
   useEffect(() => {
     // Initialize using window.VANTA.RINGS
@@ -42,6 +54,26 @@ export default function NiaHero({ onJoinWaitlistClick }) {
       vantaInstance.current = null;
     };
   }, []);
+
+  // Effect for cycling sentences
+  useEffect(() => {
+    const intervalTime = 15000; // 15 seconds
+    const fadeTime = 500; // 0.5 seconds for fade animation
+
+    const intervalId = setInterval(() => {
+      setIsFadingOut(true); // Start fading out
+
+      // Wait for fade out animation to complete before changing text and fading in
+      setTimeout(() => {
+        setCurrentSentenceIndex((prevIndex) => (prevIndex + 1) % sentences.length);
+        setIsFadingOut(false); // Start fading in
+      }, fadeTime);
+
+    }, intervalTime);
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(intervalId);
+  }, []); // Empty dependency array ensures this runs only once on mount
 
   // --- Styles ---
 
@@ -159,7 +191,7 @@ export default function NiaHero({ onJoinWaitlistClick }) {
           <img src={streaqueLogo} alt="Streaque Logo" style={logoImageStyle} />
         </div>
         <div>
-          <button className="fwl-button" onClick={onJoinWaitlistClick}>Join Waitlist</button>
+          <button className="fwl-button" onClick={onJoinWaitlistClick}>Secure Early Access</button>
         </div>
       </header>
 
@@ -173,8 +205,9 @@ export default function NiaHero({ onJoinWaitlistClick }) {
           <img src={niaHeroLogo} alt="Nia Hero Logo" style={niaLogoStyle} />
         </h1>
 
-        <p style={pStyle}>
-        AI-driven support that students trust and staff rely on.
+        {/* Apply animation class based on isFadingOut state */}
+        <p style={pStyle} className={`hero-sentence ${isFadingOut ? 'fade-out' : 'fade-in'}`}>
+          {sentences[currentSentenceIndex]}
         </p>
 
         <button className="fwl-button meet-nia-button">
@@ -195,6 +228,20 @@ export default function NiaHero({ onJoinWaitlistClick }) {
           </svg>
         </button>
       </div>
+
+      {/* Moved H2 element */}
+      {/* <h2 style={{
+        position: 'absolute',
+        bottom: '2rem', // Position 2rem from the bottom
+        left: '50%',
+        transform: 'translateX(-50%)', // Center horizontally
+        fontWeight: 700, // Bold
+        fontSize: '1.5rem',
+        color: '#ffffff', // Bright white
+        zIndex: 1 // Ensure it's above the background
+      }}>
+        Two Tools. One AI. Infinite Impact.
+      </h2> */}
     </section>
   );
 }
