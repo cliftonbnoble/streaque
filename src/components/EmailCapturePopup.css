@@ -49,6 +49,11 @@
   z-index: 2;
 }
 
+.popup-logo {
+  max-width: 150px;
+  margin: 0 auto 20px;
+}
+
 .popup-content h2 {
   margin-top: 0;
   margin-bottom: 15px;

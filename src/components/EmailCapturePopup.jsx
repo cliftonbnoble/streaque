@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './EmailCapturePopup.css';
 
-function EmailCapturePopup({ isVisible, onClose }) {
+function EmailCapturePopup({ isVisible, onClose, logo }) {
   const [email, setEmail] = useState('');
 
   const handleSubmit = (event) => {
@@ -20,6 +20,7 @@ function EmailCapturePopup({ isVisible, onClose }) {
     <div className="popup-overlay" onClick={onClose}>
       <div className="popup-content" onClick={(e) => e.stopPropagation()}>
         <button className="close-button" onClick={onClose}>&times;</button>
+        {logo && <img src={logo} alt="Streaque Logo" className="popup-logo" />}
         <h2>Join our waitlist</h2>
         <p>Two tools. One AI. Infinite impact.</p>
         <form onSubmit={handleSubmit}>

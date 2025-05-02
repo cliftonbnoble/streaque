@@ -210,7 +210,7 @@ export default function NiaHero({ onJoinWaitlistClick }) {
           {sentences[currentSentenceIndex]}
         </p>
 
-        <button className="fwl-button meet-nia-button">
+        <button className="fwl-button meet-nia-button" onClick={onJoinWaitlistClick}>
           Meet Nia
           <svg
             xmlns="http://www.w3.org/2000/svg"

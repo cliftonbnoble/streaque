@@ -1,6 +1,7 @@
 /* src/components/ProductivitySection.css */
 .productivity-section {
   background-color: #000;
+  background: linear-gradient(to bottom, #000, #111); /* Subtle gradient */
   color: #fff;
   padding: 4rem 0 6rem;
   display: flex;
@@ -9,6 +10,38 @@
   text-align: center;
   position: relative;
   overflow: hidden;
+}
+
+/* Add animated background particle effect */
+.productivity-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+      circle at 15% 50%,
+      rgba(45, 15, 70, 0.15) 0%,
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 85% 30%,
+      rgba(60, 20, 90, 0.1) 0%,
+      transparent 30%
+    );
+  opacity: 0.6;
+  z-index: 0;
+  animation: subtle-float 15s ease-in-out infinite alternate;
+}
+
+@keyframes subtle-float {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    transform: translateY(-30px) scale(1.1);
+  }
 }
 
 .productivity-content {
@@ -125,9 +158,9 @@
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    #8bc4d5 0%,
-    #3e9dc9 50%,
-    #706bbf 100%
+    #7bb4c5 0%,
+    #165cc6 50%,
+    #292752 100%
   ); /* Updated gradient */
   display: flex;
   align-items: center;
@@ -455,57 +488,663 @@
 .image-split-section {
   display: flex;
   width: 100%;
-  margin-top: 4rem; /* Add some space above */
-  padding: 0 2rem; /* Add horizontal padding for buffer */
-  gap: 2rem; /* Add gap between the two image containers */
-  box-sizing: border-box; /* Ensure padding is included in width */
+  margin-top: 4rem;
+  padding: 2rem;
+  gap: 3rem; /* Increase from 2.5rem for better spacing with the new proportions */
+  box-sizing: border-box;
+  max-width: 1280px;
+  margin: 4rem auto;
+  position: relative;
+  border-radius: 28px;
+  background-color: rgba(18, 18, 20, 0.95); /* Darker background */
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  isolation: isolate; /* Create a new stacking context */
 }
 
-.image-container {
-  flex: 1; /* Each container takes half the space */
-  position: relative; /* For potential overlay content later */
-  overflow: hidden; /* Ensure shadow doesn't cause overflow issues */
+/* Rename this class to better reflect the blue color */
+.blue-glow {
+  position: absolute;
+  bottom: -120px;
+  right: -180px; /* Adjust to position more towards the conversation container */
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(
+    circle at center,
+    rgba(61, 158, 200, 0.95) 0%,
+    rgba(54, 140, 177, 0.85) 20%,
+    rgba(46, 119, 150, 0.6) 40%,
+    rgba(39, 101, 128, 0.3) 60%,
+    rgba(0, 0, 0, 0) 85%
+  );
+  z-index: 1;
+  filter: blur(60px);
+  pointer-events: none;
+  opacity: 1;
 }
 
-.split-image {
-  display: block; /* Remove extra space below image */
-  width: 100%;
-  height: auto; /* Maintain aspect ratio */
-  box-shadow: 0 0 25px 8px rgba(0, 0, 0, 0.75); /* Black box shadow */
+/* Black fade overlay used to shape the blue glow */
+.image-split-section::after {
+  content: "";
+  position: absolute;
+  inset: 0; /* Cover the entire container */
+  background: radial-gradient(
+    circle at 65% 80%,
+    /* Adjust to match new proportions */ transparent 250px,
+    rgba(0, 0, 0, 0.98) 400px
+  );
+  border-radius: 28px;
+  z-index: 1;
+  pointer-events: none;
 }
 
-/* --- Text Overlay Styles --- */
-.text-overlay {
+/* Add subtle inner glow to the container with blue tone */
+.image-split-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 28px;
+  padding: 1px;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.15),
+    transparent 50%,
+    rgba(61, 158, 200, 0.3)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Additional subtle blue highlights */
+.conversation-container::before {
+  content: "";
   position: absolute;
   bottom: 0;
-  width: 100%; /* Take full width of container */
-  padding: 3rem 1.5rem 2rem; /* Top, H, Bottom padding */
-  background-color: #0b3d4f; /* Dark teal/blue color */
+  right: -50px; /* Adjust position */
+  width: 400px; /* Increase size */
+  height: 400px; /* Increase size */
+  background: radial-gradient(
+    circle at bottom right,
+    rgba(61, 158, 200, 0.4) 0%,
+    rgba(54, 140, 177, 0.2) 40%,
+    rgba(0, 0, 0, 0) 70%
+  );
+  filter: blur(30px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Content containers need higher z-index to stay above gradients */
+.conversation-container,
+.info-container {
+  z-index: 5;
+}
+
+/* Conversation container should be above the gradients */
+.conversation-container {
+  flex: 2; /* Change from 1 to 2 to make it take up 66% of the space */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+  position: relative;
+  z-index: 5; /* Increased z-index to be above gradients */
+  padding: 1rem;
+}
+
+/* Info container should be above the gradients */
+.info-container {
+  flex: 1; /* Keep at 1 to make it take up 33% of the space (1:2 ratio) */
+  display: flex;
+  justify-content: flex-start; /* Align content to the left */
+  align-items: center;
+  position: relative;
+  z-index: 5; /* Increased z-index to be above gradients */
+  padding: 1rem 2rem 1rem 1rem; /* Add more right padding */
+}
+
+/* Conversation UI Styles */
+.conversation-box {
+  background-color: rgba(24, 24, 27, 0.9);
+  border-radius: 16px;
+  padding: 0;
+  width: 100%;
+  max-width: 650px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.conversation-box:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+  transform: translateY(-5px) rotateY(2deg);
+}
+
+/* Control dots with different colors */
+.control-dot:nth-child(1) {
+  background-color: #ff5f57; /* Red */
+}
+
+.control-dot:nth-child(2) {
+  background-color: #ffbd2e; /* Yellow */
+}
+
+.control-dot:nth-child(3) {
+  background-color: #28ca41; /* Green */
+}
+
+/* Conversation header */
+.conversation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.conversation-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.control-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.conversation-title {
+  width: 28px;
+  height: 28px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: white;
-  box-sizing: border-box;
+  font-weight: 500;
 }
 
-.text-overlay-left {
+/* Conversation items styling - remove vertical line and dots */
+.conversation-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 30px 24px;
+  max-height: 500px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) rgba(0, 0, 0, 0.2);
+  position: relative;
+  background-color: #111111;
+}
+
+/* Custom scrollbar for webkit browsers */
+.conversation-items::-webkit-scrollbar {
+  width: 8px;
+}
+
+.conversation-items::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.conversation-items::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.conversation-items::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Remove vertical line */
+.conversation-items::before {
+  display: none;
+}
+
+/* Remove dot connectors */
+.conversation-item::before,
+.conversation-item:first-child::after,
+.conversation-item:last-child::after {
+  display: none;
+}
+
+/* Base conversation item styles */
+.conversation-item {
+  display: flex;
+  transition: all 0.3s ease;
+  position: relative;
+  width: 100%;
+  padding: 10px 0;
+}
+
+/* Candidate message (right aligned) */
+.candidate-message {
+  justify-content: flex-end;
+}
+
+/* Noon message (left aligned) */
+.noon-message {
+  justify-content: flex-start;
+}
+
+/* Message content styling - fully rounded on both sides */
+.message-content {
+  max-width: 75%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 18px; /* Consistent rounding on all sides */
+  background-color: #1e1e22;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2), 0 0 15px rgba(234, 179, 8, 0.15); /* Golden glow to match "for Students" text */
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect for message bubbles */
+.message-content:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 20px rgba(234, 179, 8, 0.25); /* Enhanced golden glow on hover */
+}
+
+/* Different background colors for each side with specific glows */
+.candidate-message .message-content {
+  background-color: #1e1e22;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2), 0 0 15px rgba(234, 179, 8, 0.15); /* Golden glow */
+}
+
+.noon-message .message-content {
+  background-color: #202730;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2), 0 0 15px rgba(234, 179, 8, 0.15); /* Same golden glow */
+}
+
+/* Hover effects with enhanced glows */
+.candidate-message .message-content:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 20px rgba(234, 179, 8, 0.3); /* Enhanced golden glow */
+}
+
+.noon-message .message-content:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 20px rgba(234, 179, 8, 0.3); /* Enhanced golden glow */
+}
+
+/* Message header with label and avatar - centered */
+.message-header {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px 12px;
+  background-color: rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  justify-content: center; /* Center the contents */
+  gap: 12px; /* Space between avatar and label */
+  position: relative;
+  top: 0;
   left: 0;
-  /* Slant goes up towards the right */
-  clip-path: polygon(0 0, 100% 35%, 100% 100%, 0% 100%);
+  width: 100%;
 }
 
-.text-overlay-right {
-  right: 0;
-  /* Slant goes up towards the left */
-  clip-path: polygon(0 35%, 100% 0, 100% 100%, 0% 100%);
+/* Avatar container inside header */
+.avatar-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
-.text-overlay h1 {
-  font-size: 1.8rem; /* Adjust as needed */
+/* Image avatar styling */
+.avatar-img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Legacy avatar styling for Noon */
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+  color: #000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.avatar.noon {
+  background: linear-gradient(135deg, #46c8ea, #466cea);
   font-weight: 700;
-  margin: 0 0 0.5rem 0;
-  line-height: 1.2;
 }
 
-.text-overlay p {
-  font-size: 1rem; /* Adjust as needed */
+/* Message label styling - bigger */
+.message-label {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Message text styling */
+.message-text {
+  font-size: 0.95rem;
+  color: white;
   line-height: 1.5;
+  padding: 16px 18px;
+}
+
+/* Special styling for messages with attachments */
+.attachment {
+  display: flex;
+  align-items: center;
+}
+
+.attachment-name {
+  position: relative;
+  padding-left: 24px;
+}
+
+.attachment-name::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 20px;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23FFFFFF"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+/* Processing animation */
+.processing .message-text {
+  display: flex;
+  align-items: center;
+}
+
+.processing-text {
+  margin-right: 8px;
+}
+
+.processing-dot {
+  font-size: 24px;
+  animation: blink 1.4s infinite;
+  position: relative;
+  top: -2px;
+  margin-left: 1px;
+}
+
+/* Stagger the animation for multiple dots */
+.processing-dot:nth-child(2) {
+  animation-delay: 0s;
+}
+
+.processing-dot:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.processing-dot:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Info Section enhanced styling */
+.info-content {
+  max-width: 400px; /* Slightly reduced from 540px */
+  padding: 0;
+  text-align: left;
+  animation: fadeInRight 1s ease-out;
+}
+
+.info-title {
+  font-size: 4.2rem; /* Slightly smaller */
+  font-weight: 800;
   margin: 0;
+  line-height: 1;
+  background: linear-gradient(to right, #fff, #ccc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+  position: relative;
+  display: inline-block;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+}
+
+.info-title::after {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.4), transparent);
+  border-radius: 2px;
+}
+
+.info-subtitle {
+  font-size: 3.2rem; /* Slightly smaller */
+  font-weight: 800;
+  color: rgba(234, 179, 8, 0.9); /* Golden color */
+  margin: 0 0 2.5rem 0; /* Reduced bottom margin */
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 20px rgba(234, 179, 8, 0.3);
+}
+
+.info-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.info-list li {
+  position: relative;
+  padding-left: 0;
+  margin-bottom: 1.5rem; /* Reduced from 2rem for tighter spacing */
+  font-size: 1rem; /* Slightly smaller */
+  line-height: 1.6;
+  color: #f8f8f8;
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+  text-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  max-width: 100%;
+}
+
+/* Add subtle highlight to the first part of each list item */
+.info-list li strong {
+  color: rgba(234, 179, 8, 0.9);
+  font-weight: 600;
+}
+
+/* Remove the bullet points */
+.info-list li::before {
+  content: none; /* Remove the bullet content */
+}
+
+/* Stagger the animations for list items */
+.info-list li:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.info-list li:nth-child(2) {
+  animation-delay: 0.3s;
+}
+.info-list li:nth-child(3) {
+  animation-delay: 0.5s;
+}
+.info-list li:nth-child(4) {
+  animation-delay: 0.7s;
+}
+
+/* Animation keyframes */
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 900px) {
+  .image-split-section {
+    flex-direction: column;
+    gap: 3rem;
+    padding: 1.5rem;
+  }
+
+  .conversation-container,
+  .info-container {
+    flex: 1; /* Reset to full width on mobile */
+  }
+
+  .conversation-box,
+  .info-content {
+    max-width: 100%;
+  }
+
+  .info-title {
+    font-size: 3.5rem;
+  }
+
+  .info-subtitle {
+    font-size: 2.5rem;
+  }
+}
+
+/* Faculty & Staff section - normal layout with custom sizing */
+.faculty-staff-section {
+  flex-direction: row; /* Normal left-to-right flow */
+  margin-top: 7rem; /* Add more space between sections */
+}
+
+/* Purple glow effect for Faculty & Staff section */
+.purple-glow {
+  position: absolute;
+  bottom: -120px;
+  left: -180px; /* Position on the left side */
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(
+    circle at center,
+    rgba(85, 86, 176, 0.95) 0%,
+    rgba(75, 76, 156, 0.85) 20%,
+    rgba(65, 66, 136, 0.6) 40%,
+    rgba(55, 56, 116, 0.3) 60%,
+    rgba(0, 0, 0, 0) 85%
+  );
+  z-index: 1;
+  filter: blur(60px);
+  pointer-events: none;
+  opacity: 1;
+}
+
+/* Info container specifically for faculty section */
+.info-container.faculty-info {
+  flex: 1; /* 33% width (1:2 ratio with conversation) */
+  order: 1; /* Make sure it's first (left side) */
+}
+
+/* Conversation container specifically for faculty section */
+.conversation-container.faculty-conversation {
+  flex: 2; /* 66% width (2:1 ratio with info) */
+  order: 2; /* Make sure it's second (right side) */
+}
+
+/* Style for the faculty-staff subtitle */
+.info-subtitle.faculty-staff {
+  color: rgba(234, 179, 8, 0.9); /* Same golden color as Students section */
+  text-shadow: 0 0 20px rgba(234, 179, 8, 0.3);
+}
+
+/* Faculty & Staff section specific styles */
+.faculty-staff-section .info-list li strong {
+  color: rgba(234, 179, 8, 0.9); /* Same golden highlight as Students section */
+}
+
+/* Adjust black fade overlay gradient position for faculty-staff section */
+.faculty-staff-section::after {
+  background: radial-gradient(
+    circle at 35% 80%,
+    /* Adjust to match new proportions */ transparent 250px,
+    rgba(0, 0, 0, 0.98) 400px
+  );
+}
+
+/* Media query adjustment for faculty-staff section */
+@media (max-width: 900px) {
+  .faculty-staff-section {
+    flex-direction: column; /* Stack on mobile */
+    margin-top: 5rem; /* Less space on mobile */
+  }
+
+  .info-container.faculty-info,
+  .conversation-container.faculty-conversation {
+    flex: 1; /* Full width on mobile */
+    order: 0; /* Reset order on mobile */
+  }
+}
+
+/* Remove the blue glow from the Faculty & Staff section */
+.faculty-staff-section .blue-glow {
+  display: none; /* Hide the blue glow entirely */
+}
+
+/* Prevent any blue highlights on the right side of faculty section */
+.faculty-staff-section .conversation-container::before {
+  display: none; /* Remove the subtle blue highlights */
+}
+
+/* Override the blue gradient in the ::before pseudo-element for Faculty & Staff section */
+.faculty-staff-section::before {
+  background: linear-gradient(
+    to bottom left,
+    /* Flip direction */ rgba(255, 255, 255, 0.15),
+    transparent 50%,
+    rgba(85, 86, 176, 0.3) /* Purple instead of blue */
+  );
 }

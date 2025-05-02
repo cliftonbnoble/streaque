@@ -1,9 +1,22 @@
 import React from 'react';
 import './ProductivitySection.css';
 import niaHeroLogo from '../assets/nia-hero-logo.png'; // Import the new logo
+import financeAgentAvatar from '../assets/finance-agents-web.png'; // Import Finance Agent avatar
+import healthAgentAvatar from '../assets/health-agents-web.png'; // Import Health Agent avatar
+import studentAgentAvatar from '../assets/student-agents-web.png'; // Student Agent avatar
+import adminAgentAvatar from '../assets/admin-agents-web.png'; // Admin Agent avatar
+import careerAgentAvatar from '../assets/career-agents-web.png'; // Career Agent avatar
+import supportAgentAvatar from '../assets/support-agents-web.png'; // Support Agent avatar
+// Import faculty agents
+import admissionAgentAvatar from '../assets/adminssion-agent-web.png'; // Admission Agent avatar (note the typo in file name)
+import hrAgentAvatar from '../assets/hr-agent-web.png'; // HR Agent avatar
+import analyticsAgentAvatar from '../assets/analytics-agent-web.png'; // Analytics Agent avatar
+import facultyAgentAvatar from '../assets/faculty-agent-web.png'; // Faculty Agent avatar
+import itAgentAvatar from '../assets/it-agent-web.png'; // IT Agent avatar
+import schedulingAgentAvatar from '../assets/scheduling-agent-web.png'; // Scheduling Agent avatar
 // Import the new images
-import niaStudentBackground from '../assets/nia-student-background.jpg';
-import niaFaculty from '../assets/nia-faculty.jpg';
+// import niaStudentBackground from '../assets/nia-student-background.jpg';
+// import niaFaculty from '../assets/nia-faculty.jpg';
 
 const issues = [
   'Limited communication',
@@ -210,71 +223,260 @@ export default function ProductivitySection() {
         </div>
       </div>
 
-      {/* Centered Content Wrapper for the Diagram - COMMENTED OUT */}
-      {/* 
-      <div className="productivity-content diagram-outer-wrapper">
-        <div className="diagram-container">
-          <div className="diagram-box box-tl">
-            <h4>Personalized Support. Proactive Insights. Powered by AI</h4>
-            <div className="diagram-icon-text">
-              <StudentIcon />
-              <p>AI That Understands Students—And Empowers Staff</p>
-            </div>
-          </div>
-
-          <div className="diagram-box box-tr">
-            <h4>Unifying Student Success with Intelligent Support</h4>
-            <div className="diagram-icon-text">
-              <GraduationCapIcon />
-              <p>The AI-Powered Ecosystem for Holistic Student Support</p>
-            </div>
-          </div>
-
-          <div className="diagram-box box-bl">
-             <h4>Your Partner in Student Success.</h4>
-             <div className="diagram-icon-text">
-               <ChatBubbleIcon />
-               <p>Student Success, Simplified and Streamlined</p>
-             </div>
-          </div>
-
-          <div className="diagram-box box-br">
-            <h4>Smarter Engagement. Better Outcomes.</h4>
-            <p>From Insight to Action—AI That Cares.</p>
-             <div className="diagram-icon-text">
-               <HandshakeIcon />
-               <p>Real-Time Help for Students. Real Impact for Institutions.</p>
-             </div>
-          </div>
-
-          <div className="diagram-center">
-            <div className="center-box-ai">NiaCoach</div>
-            <div className="center-box-generate">AI</div>
-          </div>
-        </div>
-      </div> 
-      */}
-
       {/* New Image Split Section */}
       <div className="image-split-section">
-        <div className="image-container image-container-left">
-          <img src={niaStudentBackground} alt="Student focused background" className="split-image" />
-          {/* Text Overlay for Left Image */}
-          <div className="text-overlay text-overlay-left">
-            <h1>Nia For Students</h1>
-            <p>Personalized Support. Proactive Insights. Powered by AI</p>
-            <p>Student Success, Simplified and Streamlined</p>
-            <p>Smarter Engagement. Better Outcomes. From Insight to Action.</p>
+        {/* Blue glow effect */}
+        <div className="blue-glow"></div>
+        
+        <div className="conversation-container">
+          <div className="conversation-box">
+            <div className="conversation-header">
+              <div className="conversation-controls">
+                <span className="control-dot"></span>
+                <span className="control-dot"></span>
+                <span className="control-dot"></span>
+              </div>
+              <div className="conversation-title">Nia</div>
+            </div>
+            
+            <div className="conversation-items">
+              {/* Candidate message - right aligned - Updated avatar position */}
+              <div className="conversation-item candidate-message">
+                <div className="message-content">
+                  <div className="message-header">
+                    <div className="avatar-container">
+                      <img src={financeAgentAvatar} alt="Finance Agent" className="avatar-img" />
+                    </div>
+                    <div className="message-label">Finance Agent</div>
+                  </div>
+                  <div className="message-text">
+                  Your tuition balance is due in 5 days. Want help setting up a payment plan?
+                  </div>
+                </div>
+              </div>
+
+              {/* Noon message - left aligned - Already has avatar on left */}
+              <div className="conversation-item noon-message">
+                <div className="message-content">
+                  <div className="message-header">
+                    <div className="avatar-container">
+                      <img src={healthAgentAvatar} alt="Health Agent" className="avatar-img" />
+                    </div>
+                    <div className="message-label">Health Agent</div>
+                  </div>
+                  <div className="message-text">
+                  It's been a stressful week with 3 exams—would you like to schedule a wellness break or mindfulness session?
+                  </div>
+                </div>
+              </div>
+
+              {/* Third message - Student Agent - Updated avatar position */}
+              <div className="conversation-item candidate-message">
+                <div className="message-content">
+                  <div className="message-header">
+                    <div className="avatar-container">
+                      <img src={studentAgentAvatar} alt="Student Agent" className="avatar-img" />
+                    </div>
+                    <div className="message-label">Student Agent</div>
+                  </div>
+                  <div className="message-text">
+                  You have 2 assignments due tomorrow and a quiz in 3 days. Want a focused study plan?
+                  </div>
+                </div>
+              </div>
+
+              {/* Fourth message - Career Agent (updated from Admin) */}
+              <div className="conversation-item noon-message">
+                <div className="message-content">
+                  <div className="message-header">
+                    <div className="avatar-container">
+                      <img src={careerAgentAvatar} alt="Career Agent" className="avatar-img" />
+                    </div>
+                    <div className="message-label">Career Agent</div>
+                  </div>
+                  <div className="message-text">
+                    A company hiring psychology interns is visiting campus Tuesday. Want to RSVP or prep your resume?
+                  </div>
+                </div>
+              </div>
+
+              {/* Fifth message - Admin Agent (updated from Finance Agent) */}
+              <div className="conversation-item candidate-message">
+                <div className="message-content">
+                  <div className="message-header">
+                    <div className="avatar-container">
+                      <img src={adminAgentAvatar} alt="Admin Agent" className="avatar-img" />
+                    </div>
+                    <div className="message-label">Admin Agent</div>
+                  </div>
+                  <div className="message-text">
+                    The add/drop period ends Friday. Do you want to drop that course you haven't attended?
+                  </div>
+                </div>
+              </div>
+
+              {/* Sixth message - Support Agent with processing animation */}
+              <div className="conversation-item noon-message processing">
+                <div className="message-content">
+                  <div className="message-header">
+                    <div className="avatar-container">
+                      <img src={supportAgentAvatar} alt="Support Agent" className="avatar-img" />
+                    </div>
+                    <div className="message-label">Support Agent</div>
+                  </div>
+                  <div className="message-text">
+                    <span className="processing-text">Need help finding your Zoom link or class recording from yesterday?</span>
+                    <span className="processing-dot">•</span>
+                    <span className="processing-dot">•</span>
+                    <span className="processing-dot">•</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="image-container image-container-right">
-          <img src={niaFaculty} alt="Faculty focused background" className="split-image" />
-          {/* Text Overlay for Right Image */}
-          <div className="text-overlay text-overlay-right">
-            <h1>Nia For Faculty & Staff</h1>
-            <p>The AI-Powered Ecosystem for Holistic Student Support</p>
-            <p>Real-Time Help for Students. Real Impact for Institutions.</p>
-            <p>AI That Understands Students—And Empowers Staff</p>
+
+        <div className="info-container">
+          <div className="info-content">
+            <h2 className="info-title">Nia</h2>
+            <h3 className="info-subtitle">for Students</h3>
+            
+            <ul className="info-list">
+              <li><strong>Context-Aware Support at Every Step:</strong> Provides real-time guidance that adapts to each student's journey.</li>
+              <li><strong>Data-Driven Personalization:</strong> Harnesses program metrics and student inputs for tailored advice.</li>
+              <li><strong>Proactive Nudges Before Challenges:</strong> Detects risks early and delivers timely outreach.</li>
+              <li><strong>Continuous Learning Engine:</strong> Refines its insights from every interaction to enhance support.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Faculty & Staff Section - Info on left, conversation on right */}
+      <div className="image-split-section faculty-staff-section">
+        {/* Purple glow effect on left only */}
+        <div className="purple-glow"></div>
+        
+        {/* Info container - now first in DOM order (left) */}
+        <div className="info-container faculty-info">
+          <div className="info-content">
+            <h2 className="info-title">Nia</h2>
+            <h3 className="info-subtitle faculty-staff">for Faculty & Staff</h3>
+            
+            <ul className="info-list">
+              <li><strong>Automated Outreach Workflows:</strong> Automates repetitive, cross-system tasks with customizable AI pipelines.</li>
+              <li><strong>Smart Intervention Alerts:</strong> Detects macro trends and flags individual at-risk students for timely action.</li>
+              <li><strong>Unified Student Profiles:</strong> Consolidates progress, engagement, wellness, and program data into a 360° view.</li>
+              <li><strong>Proactive Strategy Recommendations:</strong> Generates group- and student-level intervention plans before issues escalate.</li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Conversation container - now second in DOM order (right) */}
+        <div className="conversation-container faculty-conversation">
+          <div className="conversation-box">
+            <div className="conversation-header">
+              <div className="conversation-controls">
+                <span className="control-dot"></span>
+                <span className="control-dot"></span>
+                <span className="control-dot"></span>
+              </div>
+              <div className="conversation-title">Nia</div>
+            </div>
+            
+            <div className="conversation-items">
+              {/* First message - Admissions Agent */}
+              <div className="conversation-item candidate-message">
+                <div className="message-content">
+                  <div className="message-header">
+                    <div className="avatar-container">
+                      <img src={admissionAgentAvatar} alt="Admissions Agent" className="avatar-img" />
+                    </div>
+                    <div className="message-label">Admissions Agent</div>
+                  </div>
+                  <div className="message-text">
+                    You have 14 applicants still missing transcripts—should I send them a follow-up reminder?
+                  </div>
+                </div>
+              </div>
+
+              {/* Second message - HR Agent */}
+              <div className="conversation-item noon-message">
+                <div className="message-content">
+                  <div className="message-header">
+                    <div className="avatar-container">
+                      <img src={hrAgentAvatar} alt="HR Agent" className="avatar-img" />
+                    </div>
+                    <div className="message-label">HR Agent</div>
+                  </div>
+                  <div className="message-text">
+                    Three new hires haven’t completed their onboarding forms. Would you like me to resend the link?
+                  </div>
+                </div>
+              </div>
+
+              {/* Third message - Analytics Agent */}
+              <div className="conversation-item candidate-message">
+                <div className="message-content">
+                  <div className="message-header">
+                    <div className="avatar-container">
+                      <img src={analyticsAgentAvatar} alt="Analytics Agent" className="avatar-img" />
+                    </div>
+                    <div className="message-label">Analytics Agent</div>
+                  </div>
+                  <div className="message-text">
+                    Student engagement dropped last week—should I generate a report comparing LMS logins and grades?
+                  </div>
+                </div>
+              </div>
+
+              {/* Fourth message - Faculty Agent */}
+              <div className="conversation-item noon-message">
+                <div className="message-content">
+                  <div className="message-header">
+                    <div className="avatar-container">
+                      <img src={facultyAgentAvatar} alt="Faculty Agent" className="avatar-img" />
+                    </div>
+                    <div className="message-label">Faculty Agent</div>
+                  </div>
+                  <div className="message-text">
+                    Five students haven’t submitted the assignment due yesterday. Want to send a gentle nudge?
+                  </div>
+                </div>
+              </div>
+
+              {/* Fifth message - IT Agent */}
+              <div className="conversation-item candidate-message">
+                <div className="message-content">
+                  <div className="message-header">
+                    <div className="avatar-container">
+                      <img src={itAgentAvatar} alt="IT Agent" className="avatar-img" />
+                    </div>
+                    <div className="message-label">IT Agent</div>
+                  </div>
+                  <div className="message-text">
+                    Three students reported issues accessing your Zoom link. Want to reset it and resend?
+                  </div>
+                </div>
+              </div>
+
+              {/* Sixth message - Scheduling Agent with processing animation */}
+              <div className="conversation-item noon-message processing">
+                <div className="message-content">
+                  <div className="message-header">
+                    <div className="avatar-container">
+                      <img src={schedulingAgentAvatar} alt="Scheduling Agent" className="avatar-img" />
+                    </div>
+                    <div className="message-label">Scheduling Agent</div>
+                  </div>
+                  <div className="message-text">
+                    <span className="processing-text">Your next department meeting overlaps with a student advising slot. Want to reschedule one?</span>
+                    <span className="processing-dot">•</span>
+                    <span className="processing-dot">•</span>
+                    <span className="processing-dot">•</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

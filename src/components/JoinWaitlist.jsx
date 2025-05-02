@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import './JoinWaitlist.css';
+import EmailCapturePopup from './EmailCapturePopup';
+import streaqueLogo from '../assets/streaque-logo.png';
 
 // Access variables from .env file (prefixed with VITE_)
 // Ensure your .env file has VITE_APPS_SCRIPT_URL and VITE_APPS_SCRIPT_SECRET
@@ -13,6 +15,7 @@ export function JoinWaitlist({ withInput = false }) {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState('idle'); // idle, loading, success, error
   const [message, setMessage] = useState('');
+  const [showPopup, setShowPopup] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -88,19 +91,22 @@ export function JoinWaitlist({ withInput = false }) {
     );
   }
 
-  // Logic for the header button (if it should open a modal or navigate)
+  // Logic for the header button - now opens the popup
   const handleHeaderClick = () => {
-    // Example: Scroll to the main waitlist section
-    const waitlistSection = document.getElementById('waitlist');
-    if (waitlistSection) {
-        waitlistSection.scrollIntoView({ behavior: 'smooth' });
-    }
+    setShowPopup(true);
   };
 
   return (
-    <button className="join-waitlist-header-button" onClick={handleHeaderClick}>
-      Join Waitlist
-    </button>
+    <>
+      <button className="join-waitlist-header-button" onClick={handleHeaderClick}>
+        Secure Early Access
+      </button>
+      <EmailCapturePopup 
+        isVisible={showPopup} 
+        onClose={() => setShowPopup(false)} 
+        logo={streaqueLogo}
+      />
+    </>
   );
 }
 
