@@ -153,20 +153,21 @@
 }
 
 .star-circle {
-  width: 200px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
   border-radius: 50%;
   background: radial-gradient(
-    circle,
-    #7bb4c5 0%,
+    circle at 55% 45%,
+    #b1e0ed 0%,
+    /* Lighter blue starting point */ #7bb4c5 20%,
     #165cc6 50%,
     #292752 100%
-  ); /* Updated gradient */
+  ); /* Adjusted gradient with offset center for dynamic look */
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.05),
-    0 0 0 16px rgba(0, 0, 0, 0.15);
+    0 0 0 16px rgba(0, 0, 0, 0.15), 0 0 45px rgba(61, 158, 200, 0.5); /* Add outer glow */
   position: relative;
   animation: pulse 2.5s infinite ease-in-out;
 }
@@ -176,46 +177,88 @@
 .star-circle::after {
   content: "";
   position: absolute;
-  left: -3px; /* Offset slightly for border */
-  top: -3px; /* Offset slightly for border */
-  right: -3px;
-  bottom: -3px;
-  border: 3px solid rgba(180, 249, 207, 0.6); /* Use light green from gradient, semi-transparent */
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid rgba(255, 255, 255, 0.6); /* Thinner border with lower opacity */
   border-radius: 50%;
-  animation: radiate 2.5s infinite ease-out;
-  z-index: -1; /* Place behind the main circle */
-  opacity: 0; /* Start invisible until animation begins */
+  animation: radiate-circle 2.5s infinite ease-out; /* Slower animation */
+  z-index: -1;
+  opacity: 0;
 }
 
-/* Stagger the second band */
+/* Add a third radiating ring with ::after */
 .star-circle::after {
-  animation-delay: 1.25s; /* Half of the animation duration */
+  animation-delay: 0.83s; /* Adjusted delay */
+}
+
+/* Add additional rings using pseudo-elements of star-container */
+.star-container::before,
+.star-container::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 250px;
+  height: 250px;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(255, 255, 255, 0.6); /* Thinner border with lower opacity */
+  border-radius: 50%;
+  animation: radiate-container 2.5s infinite ease-out; /* Slower animation */
+  z-index: -1;
+  opacity: 0;
+}
+
+/* Stagger the animation of the extra rings */
+.star-container::before {
+  animation-delay: 0.42s; /* Adjusted delay */
+}
+
+.star-container::after {
+  animation-delay: 1.25s; /* Adjusted delay */
 }
 
 /* Keyframes for the pulsing animation */
 @keyframes pulse {
   0% {
     transform: scale(1);
+    box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.05),
+      0 0 0 16px rgba(0, 0, 0, 0.15), 0 0 45px rgba(61, 158, 200, 0.5);
   }
   50% {
-    transform: scale(1.08); /* Increased scale for more drama */
+    transform: scale(1.08);
+    box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.1),
+      0 0 0 16px rgba(0, 0, 0, 0.2), 0 0 60px rgba(61, 158, 200, 0.7);
   }
   100% {
     transform: scale(1);
+    box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.05),
+      0 0 0 16px rgba(0, 0, 0, 0.15), 0 0 45px rgba(61, 158, 200, 0.5);
   }
 }
 
-/* Keyframes for the radiating bands */
-@keyframes radiate {
+/* Separate keyframes for star-circle pseudo-elements */
+@keyframes radiate-circle {
   0% {
     transform: scale(1);
-    opacity: 0.6; /* Start visible */
+    opacity: 0.7; /* Lower starting opacity */
   }
-  80%,
   100% {
-    /* Fade out and expand */
-    transform: scale(1.5); /* Control how far bands expand */
-    opacity: 0; /* Fade out completely */
+    transform: scale(1.7); /* Reduced scale factor */
+    opacity: 0;
+  }
+}
+
+/* Keyframes for star-container pseudo-elements */
+@keyframes radiate-container {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.7; /* Lower starting opacity */
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.7); /* Reduced scale factor */
+    opacity: 0;
   }
 }
 
@@ -511,20 +554,22 @@
   position: absolute;
   bottom: -120px;
   right: -180px; /* Adjust to position more towards the conversation container */
-  width: 700px;
-  height: 700px;
+  width: 1200px; /* Increased further for more coverage */
+  height: 1200px; /* Increased further for more coverage */
   background: radial-gradient(
-    circle at center,
-    rgba(61, 158, 200, 0.95) 0%,
-    rgba(54, 140, 177, 0.85) 20%,
-    rgba(46, 119, 150, 0.6) 40%,
-    rgba(39, 101, 128, 0.3) 60%,
-    rgba(0, 0, 0, 0) 85%
+    ellipse at bottom right,
+    /* Changed from circle to ellipse with focal point at bottom right */
+      rgba(61, 158, 200, 0.95) 0%,
+    rgba(54, 140, 177, 0.85) 15%,
+    rgba(46, 119, 150, 0.6) 30%,
+    rgba(39, 101, 128, 0.3) 50%,
+    rgba(0, 0, 0, 0) 75%
   );
   z-index: 1;
   filter: blur(60px);
   pointer-events: none;
   opacity: 1;
+  transform: translateY(-200px) translateX(-100px); /* Adjusted to shift more upward */
 }
 
 /* Black fade overlay used to shape the blue glow */
@@ -533,9 +578,11 @@
   position: absolute;
   inset: 0; /* Cover the entire container */
   background: radial-gradient(
-    circle at 65% 80%,
-    /* Adjust to match new proportions */ transparent 250px,
-    rgba(0, 0, 0, 0.98) 400px
+    circle at 75% 90%,
+    /* Adjusted position to bottom right */ transparent 300px,
+    /* Increased transparent area */ rgba(0, 0, 0, 0.7) 500px,
+    /* Reduced opacity from 0.98 to 0.7 */ rgba(0, 0, 0, 0.9) 600px
+      /* Added extra step for smoother transition */
   );
   border-radius: 28px;
   z-index: 1;
@@ -1067,20 +1114,22 @@
   position: absolute;
   bottom: -120px;
   left: -180px; /* Position on the left side */
-  width: 700px;
-  height: 700px;
+  width: 1200px; /* Increased from 700px to match blue-glow */
+  height: 1200px; /* Increased from 700px to match blue-glow */
   background: radial-gradient(
-    circle at center,
-    rgba(85, 86, 176, 0.95) 0%,
-    rgba(75, 76, 156, 0.85) 20%,
-    rgba(65, 66, 136, 0.6) 40%,
-    rgba(55, 56, 116, 0.3) 60%,
-    rgba(0, 0, 0, 0) 85%
+    ellipse at bottom left,
+    /* Changed from circle to ellipse with focal point at bottom left */
+      rgba(85, 86, 176, 0.95) 0%,
+    rgba(75, 76, 156, 0.85) 15%,
+    rgba(65, 66, 136, 0.6) 30%,
+    rgba(55, 56, 116, 0.3) 50%,
+    rgba(0, 0, 0, 0) 75%
   );
   z-index: 1;
   filter: blur(60px);
   pointer-events: none;
   opacity: 1;
+  transform: translateY(-200px) translateX(100px); /* Shift upward and rightward */
 }
 
 /* Info container specifically for faculty section */
@@ -1109,9 +1158,11 @@
 /* Adjust black fade overlay gradient position for faculty-staff section */
 .faculty-staff-section::after {
   background: radial-gradient(
-    circle at 35% 80%,
-    /* Adjust to match new proportions */ transparent 250px,
-    rgba(0, 0, 0, 0.98) 400px
+    circle at 25% 90%,
+    /* Adjusted to bottom left (from 35% 80%) */ transparent 300px,
+    /* Increased transparent area */ rgba(0, 0, 0, 0.7) 500px,
+    /* Reduced opacity for a smoother transition */ rgba(0, 0, 0, 0.9) 600px
+      /* Added extra step for smoother transition */
   );
 }
 
