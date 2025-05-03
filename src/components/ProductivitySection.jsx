@@ -224,7 +224,7 @@ export default function ProductivitySection() {
       </div>
 
       {/* New Image Split Section */}
-      <div className="image-split-section">
+      <div className="image-split-section" style={{ marginBottom: '30px' }}>
         {/* Blue glow effect */}
         <div className="blue-glow"></div>
         
@@ -352,7 +352,7 @@ export default function ProductivitySection() {
       </div>
 
       {/* Faculty & Staff Section - Info on left, conversation on right */}
-      <div className="image-split-section faculty-staff-section">
+      <div className="image-split-section faculty-staff-section" style={{ marginTop: '30px' }}>
         {/* Purple glow effect on left only */}
         <div className="purple-glow"></div>
         
@@ -409,7 +409,7 @@ export default function ProductivitySection() {
                     <div className="message-label">HR Agent</div>
                   </div>
                   <div className="message-text">
-                    Three new hires haven’t completed their onboarding forms. Would you like me to resend the link?
+                    Three new hires haven't completed their onboarding forms. Would you like me to resend the link?
                   </div>
                 </div>
               </div>
@@ -439,7 +439,7 @@ export default function ProductivitySection() {
                     <div className="message-label">Faculty Agent</div>
                   </div>
                   <div className="message-text">
-                    Five students haven’t submitted the assignment due yesterday. Want to send a gentle nudge?
+                    Five students haven't submitted the assignment due yesterday. Want to send a gentle nudge?
                   </div>
                 </div>
               </div>

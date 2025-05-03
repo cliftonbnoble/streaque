@@ -1,17 +1,74 @@
 /* Styles for NiaHero sentence animation */
 .hero-sentence {
-  transition: opacity 1s ease-in-out;
-  opacity: 0;
-  min-height: 3.5em; /* Add min-height to prevent layout shifts, adjust as needed based on line height */
+  position: relative;
+  min-height: 3.5em; /* Maintain min-height to prevent layout shifts */
   display: flex;
-  align-items: center; /* Vertically center text within the min-height */
-  justify-content: center; /* Horizontally center text */
+  align-items: center;
+  justify-content: center;
+  overflow: visible; /* Allow content to be fully visible */
+  opacity: 0;
+  transform: translateX(-100px); /* Start position for entering sentences */
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  width: 100%; /* Ensure container takes full width */
+  text-align: center; /* Center text for better appearance */
+  padding: 0 1rem; /* Add padding to prevent text from touching edges */
+  white-space: nowrap; /* Keep on one line by default */
 }
 
 .hero-sentence.fade-in {
   opacity: 1;
+  transform: translateX(0); /* End position for entering sentences */
 }
 
 .hero-sentence.fade-out {
   opacity: 0;
+  transform: translateX(100px); /* Exit position for leaving sentences */
+}
+
+/* Header styles */
+.hero-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  z-index: 2;
+}
+
+.hero-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .hero-sentence {
+    font-size: 0.9em; /* Slightly smaller on mobile */
+    white-space: normal; /* Allow wrapping on mobile */
+    line-height: 1.4; /* Better line spacing when wrapped */
+  }
+
+  .hero-header {
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.25rem;
+    padding: 1.5rem 1rem;
+  }
+
+  .hero-logo-container {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Additional breakpoint for medium screens */
+@media (max-width: 992px) and (min-width: 769px) {
+  .hero-sentence {
+    padding: 0 2rem; /* Add more horizontal padding on medium screens */
+    font-size: 0.95em; /* Slightly reduced font size */
+  }
 }

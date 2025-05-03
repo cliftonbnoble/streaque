@@ -99,24 +99,6 @@ export default function NiaHero({ onJoinWaitlistClick }) {
     zIndex: 0, // Behind content
   };
 
-  const headerStyle = {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: '1.5rem 3rem', // Adjust padding as needed
-    zIndex: 2, // Above Vanta, below potential modals
-  };
-
-  const logoContainerStyle = {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '0.75rem',
-  };
-
   // Add style for the image logo
   const logoImageStyle = {
     height: '48px', // Adjusted height (was 32px)
@@ -174,20 +156,20 @@ export default function NiaHero({ onJoinWaitlistClick }) {
   };
 
   const pStyle = {
-    maxWidth: '640px', // max-w-xl
+    maxWidth: '100%', // Changed from 640px to allow full width
     fontSize: '1.25rem', // text-lg
     lineHeight: '1.75', // leading-relaxed approx
     color: '#ffffff', // Changed to bright white
     fontWeight: 700, // Added bold font weight
     marginBottom: '1.5rem', // Reduced bottom margin (was 2.5rem)
+    overflow: 'visible', // Ensure text is fully visible
   };
 
   return (
     <section style={sectionStyle}>
-      {/* Header */}
-      <header style={headerStyle}>
-        <div style={logoContainerStyle}>
-          {/* Replace circle and text with image */}
+      {/* Header - updated to use CSS classes */}
+      <header className="hero-header">
+        <div className="hero-logo-container">
           <img src={streaqueLogo} alt="Streaque Logo" style={logoImageStyle} />
         </div>
         <div>

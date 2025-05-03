@@ -72,6 +72,45 @@
   z-index: 0;
 }
 
+/* Media queries for responsive layout */
+@media (max-width: 768px) {
+  .fwl-section {
+    padding: 4rem 1.5rem 2rem;
+  }
+
+  .fwl-content {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .fwl-logo {
+    position: static;
+    transform: none;
+    margin: 0 auto;
+    left: auto;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+  .fwl-section {
+    padding: 3.5rem 1rem 1.5rem;
+    min-height: 120px;
+  }
+
+  .fwl-logo {
+    height: 40px;
+  }
+
+  .fwl-button {
+    padding: 0.5rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
 /* The styles below were moved to NiaHero.css */
 /*
 .hero-sentence {
