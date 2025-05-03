@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import * as THREE from 'three';
+import React, { useEffect, useState } from 'react';
+// Comment out Three.js import as it's only needed for Vanta
+// import * as THREE from 'three';
 // Removed import for CustomWavesEffect
 import streaqueLogo from '../assets/streaque-logo.png'; // Header logo
 import niaHeroLogo from '../assets/nia-hero-logo.png'; // Import the Nia hero logo
@@ -16,17 +17,28 @@ const sentences = [
 ];
 
 export default function NiaHero({ onJoinWaitlistClick }) {
-  // Refs remain the same
-  const vantaRef = useRef(null);
-  const vantaInstance = useRef(null);
+  // Remove unused refs
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
   const [isFadingOut, setIsFadingOut] = useState(false); // State for animation
 
   useEffect(() => {
-    // Initialize using window.VANTA.RINGS
+    // Comment out Vanta initialization
+    /*
+    // Debug logging to check Vanta availability
+    console.log("Vanta available:", window.VANTA ? "Yes" : "No");
+    console.log("Vanta FOG available:", window.VANTA && window.VANTA.FOG ? "Yes" : "No");
+    
+    // Initialize using window.VANTA.FOG instead of RINGS
     if (vantaRef.current && window.VANTA && !vantaInstance.current) {
       try {
-        vantaInstance.current = window.VANTA.RINGS({
+        // Check if FOG effect is available
+        if (!window.VANTA.FOG) {
+          console.error("VANTA.FOG effect is not available. Available effects:", Object.keys(window.VANTA));
+          return;
+        }
+        
+        console.log("Initializing VANTA.FOG with params");
+        vantaInstance.current = window.VANTA.FOG({
           el: vantaRef.current,
           THREE: THREE, // Pass the imported THREE
           mouseControls: true,
@@ -34,13 +46,15 @@ export default function NiaHero({ onJoinWaitlistClick }) {
           gyroControls: false,
           minHeight: 200.00,
           minWidth: 200.00,
-          scale: 1.00,
-          scaleMobile: 1.00,
-          // Add RINGS specific options
-          backgroundColor: 0x000000, // Set background to black
-          color: 0x00ffff // Change rings color to cyan for better contrast
+          highlightColor: 0xd4e64d,
+          midtoneColor: 0x56a6e6,
+          lowlightColor: 0xb299f2,
+          baseColor: 0x000000,
+          blurFactor: 0.66,
+          speed: 1.50,
+          zoom: 0.30
         });
-        // console.log("Initialized window.VANTA.RINGS");
+        console.log("VANTA.FOG initialization successful");
       } catch (error) {
         console.error('Error initializing Vanta:', error);
       }
@@ -53,6 +67,7 @@ export default function NiaHero({ onJoinWaitlistClick }) {
       }
       vantaInstance.current = null;
     };
+    */
   }, []);
 
   // Effect for cycling sentences
@@ -87,16 +102,7 @@ export default function NiaHero({ onJoinWaitlistClick }) {
     display: 'flex',     // Use flex to help center content vertically
     flexDirection: 'column',
     alignItems: 'center', // Center horizontally
-    justifyContent: 'center', // Center vertically
-  };
-
-  const vantaBackgroundStyle = {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    zIndex: 0, // Behind content
+    justifyContent: 'space-between', // Changed to space-between to push content apart
   };
 
   // Add style for the image logo
@@ -107,7 +113,7 @@ export default function NiaHero({ onJoinWaitlistClick }) {
 
   const contentStyle = {
     position: 'relative',
-    zIndex: 1, // Above Vanta background
+    zIndex: 3, // Increased z-index to be above the video and overlay
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -115,6 +121,7 @@ export default function NiaHero({ onJoinWaitlistClick }) {
     maxWidth: '896px', // max-w-4xl approx
     padding: '4rem 1.5rem', // Increased top padding, px-6
     textAlign: 'center',
+    marginTop: '10vh', // Add margin at the top to push content down from header
     // Removed height: '90vh' and margin: '0 auto' as flexbox on section handles centering
   };
 
@@ -165,8 +172,65 @@ export default function NiaHero({ onJoinWaitlistClick }) {
     overflow: 'visible', // Ensure text is fully visible
   };
 
+  // Video container style
+  const videoContainerStyle = {
+    position: 'absolute',
+    left: 0,
+    width: '100%',
+    height: '50%', // Reduce container height
+    overflow: 'hidden',
+    zIndex: 1,
+    bottom: 0, // Position at bottom
+    top: 'auto', // Override top position
+  };
+
+  // Style for the blue overlay
+  const blueOverlayStyle = {
+    position: 'absolute',
+    left: 0,
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#0066cc', // Blue color
+    opacity: 0.4, // Adjust opacity to control intensity
+    mixBlendMode: 'overlay', // Blend mode for more natural color mixing
+    zIndex: 2, // Above the video (1) but below content (3)
+  };
+
+  // Style for the video background
+  const videoStyle = {
+    position: 'absolute',
+    width: '100%',
+    height: '200%', // Double the height to compensate for container
+    objectFit: 'cover', // Use cover to fill the container
+    transform: 'scaleY(0.5)', // Scale it to 50% of its height
+    transformOrigin: 'bottom', // Transform from bottom
+    bottom: 0, // Align to bottom
+    top: 'auto', // Override top position
+    zIndex: 1, // Ensure video is at the bottom of the stack
+    filter: 'hue-rotate(210deg) saturate(150%) brightness(80%)', // Add blue tint filter
+  };
+
   return (
     <section style={sectionStyle}>
+      {/* Video background */}
+      <div style={videoContainerStyle}>
+        <video 
+          style={videoStyle} 
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+        >
+          <source 
+            src="https://eubzkoywhckxuyrjsrje.supabase.co/storage/v1/object/public/website/line-waves.webm?t=2024-03-19T22%3A09%3A07.266Z" 
+            type="video/webm" 
+          />
+          Your browser does not support the video tag.
+        </video>
+        {/* Blue overlay */}
+        <div style={blueOverlayStyle}></div>
+      </div>
+      
       {/* Header - updated to use CSS classes */}
       <header className="hero-header">
         <div className="hero-logo-container">
@@ -176,9 +240,6 @@ export default function NiaHero({ onJoinWaitlistClick }) {
           <button className="fwl-button" onClick={onJoinWaitlistClick}>Secure Early Access</button>
         </div>
       </header>
-
-      {/* Vanta Canvas Container - Attach renamed ref */}
-      <div ref={vantaRef} style={vantaBackgroundStyle}></div>
 
       {/* Hero Content Container */}
       <div style={contentStyle}>
@@ -210,20 +271,6 @@ export default function NiaHero({ onJoinWaitlistClick }) {
           </svg>
         </button>
       </div>
-
-      {/* Moved H2 element */}
-      {/* <h2 style={{
-        position: 'absolute',
-        bottom: '2rem', // Position 2rem from the bottom
-        left: '50%',
-        transform: 'translateX(-50%)', // Center horizontally
-        fontWeight: 700, // Bold
-        fontSize: '1.5rem',
-        color: '#ffffff', // Bright white
-        zIndex: 1 // Ensure it's above the background
-      }}>
-        Two Tools. One AI. Infinite Impact.
-      </h2> */}
     </section>
   );
 }
