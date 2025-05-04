@@ -237,7 +237,7 @@ export default function NiaHero({ onJoinWaitlistClick }) {
             viewBox="0 0 24 24"
             strokeWidth="2"
             stroke="currentColor"
-            style={{ width: '16px', height: '16px', flexShrink: 0, marginLeft: '0.5rem' }}
+            className="button-arrow-icon"
           >
             <path
               strokeLinecap="round"

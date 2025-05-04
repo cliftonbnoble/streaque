@@ -1,35 +1,41 @@
 /* src/components/FootWaitlist.css */
+
 .fwl-section {
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
   min-height: 150px;
   padding: 4rem 3rem 3rem;
   overflow: hidden;
   background: #000;
 }
 
+.fwl-container {
+  width: 100%;
+  max-width: 1280px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 0 1rem;
+}
+
 .fwl-content {
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 1280px;
-  margin: 0 auto;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .fwl-logo {
   position: absolute;
-  left: 3rem;
-  top: 50%;
-  transform: translateY(-50%);
+  left: 0;
   height: 48px;
   width: auto;
   display: block;
-  z-index: 2;
+  z-index: 3;
 }
 
 .fwl-button {
@@ -69,7 +75,7 @@
     rgba(255, 255, 255, 0.2) 80%,
     transparent
   );
-  z-index: 0;
+  z-index: 1;
 }
 
 /* Media queries for responsive layout */
@@ -78,37 +84,58 @@
     padding: 4rem 1.5rem 2rem;
   }
 
-  .fwl-content {
+  .fwl-container {
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-    text-align: center;
+    gap: 2rem;
+  }
+
+  .fwl-content {
+    width: 100%;
   }
 
   .fwl-logo {
     position: static;
-    transform: none;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Improve button clickability on tablets */
+  .fwl-content .meet-nia-button {
+    min-width: 200px;
+    padding: 0.8rem 2rem;
     margin: 0 auto;
-    left: auto;
   }
 }
 
 /* Extra small devices */
 @media (max-width: 480px) {
   .fwl-section {
-    padding: 3.5rem 1rem 1.5rem;
+    padding: 3rem 1rem 2rem;
     min-height: 120px;
+  }
+
+  .fwl-container {
+    gap: 1.5rem;
   }
 
   .fwl-logo {
     height: 40px;
+    margin-bottom: 1rem;
   }
 
-  .fwl-button {
-    padding: 0.5rem 1.5rem;
-    font-size: 0.9rem;
+  /* Enhance mobile button for better touch target */
+  .fwl-content .meet-nia-button {
+    min-width: 220px;
+    min-height: 44px; /* Ensure good tap target size */
+    padding: 0.7rem 1.8rem;
+    font-size: 1rem;
+    border-radius: 25px;
   }
+}
+
+/* Active state for mobile touch feedback */
+.fwl-content .meet-nia-button:active {
+  transform: translateY(1px);
+  transition: transform 0.1s;
 }
 
 /* The styles below were moved to NiaHero.css */

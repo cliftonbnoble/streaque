@@ -158,16 +158,16 @@
   border-radius: 50%;
   background: radial-gradient(
     circle at 55% 45%,
-    #b1e0ed 0%,
-    /* Lighter blue starting point */ #7bb4c5 20%,
-    #165cc6 50%,
-    #292752 100%
-  ); /* Adjusted gradient with offset center for dynamic look */
+    #9ecede 0%,
+    /* Darkened from #b1e0ed */ #5c9eb3 20%,
+    /* Darkened from #7bb4c5 */ #0d4aac 50%,
+    /* Darkened from #165cc6 */ #1d1c42 100% /* Darkened from #292752 */
+  ); /* Adjusted gradient with darker colors */
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.05),
-    0 0 0 16px rgba(0, 0, 0, 0.15), 0 0 45px rgba(61, 158, 200, 0.5); /* Add outer glow */
+  box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.05), 0 0 0 16px rgba(0, 0, 0, 0.2),
+    /* Darkened shadow */ 0 0 45px rgba(45, 125, 160, 0.5); /* Darkened glow */
   position: relative;
   animation: pulse 2.5s infinite ease-in-out;
 }
@@ -224,17 +224,20 @@
   0% {
     transform: scale(1);
     box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.05),
-      0 0 0 16px rgba(0, 0, 0, 0.15), 0 0 45px rgba(61, 158, 200, 0.5);
+      0 0 0 16px rgba(0, 0, 0, 0.2),
+      /* Darkened */ 0 0 45px rgba(45, 125, 160, 0.5); /* Darkened */
   }
   50% {
     transform: scale(1.08);
     box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.1),
-      0 0 0 16px rgba(0, 0, 0, 0.2), 0 0 60px rgba(61, 158, 200, 0.7);
+      0 0 0 16px rgba(0, 0, 0, 0.25),
+      /* Darkened */ 0 0 60px rgba(45, 125, 160, 0.7); /* Darkened */
   }
   100% {
     transform: scale(1);
     box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.05),
-      0 0 0 16px rgba(0, 0, 0, 0.15), 0 0 45px rgba(61, 158, 200, 0.5);
+      0 0 0 16px rgba(0, 0, 0, 0.2),
+      /* Darkened */ 0 0 45px rgba(45, 125, 160, 0.5); /* Darkened */
   }
 }
 
@@ -275,9 +278,11 @@
   width: 85%; /* Adjust percentage to control size within circle */
   height: 85%;
   object-fit: contain; /* Scale image down to fit, preserving aspect ratio */
-  /* Combine existing shadow with new white stroke shadows */
-  filter: drop-shadow(0 0 1px white) drop-shadow(0 0 1px white)
-    drop-shadow(0 0 1px white) drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.4));
+  /* Enhanced white glow and shadow for better contrast against darker background */
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.9))
+    drop-shadow(0 0 2px rgba(255, 255, 255, 0.9))
+    drop-shadow(0 0 3px rgba(255, 255, 255, 0.7))
+    drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.5));
 }
 
 /* --- Styles for the New Diagram --- */
@@ -478,6 +483,68 @@
   .diagram-container::after {
     display: none;
   }
+
+  .star-circle {
+    width: 200px; /* Reduced from 250px */
+    height: 200px; /* Reduced from 250px */
+  }
+
+  .star-container::before,
+  .star-container::after {
+    width: 200px; /* Match the circle size */
+    height: 200px; /* Match the circle size */
+  }
+
+  .star-logo-img {
+    width: 80%; /* Slightly smaller relative to the circle */
+    height: 80%;
+  }
+
+  .marquee-wrapper {
+    height: 180px; /* Reduced from 220px to match smaller star-circle */
+  }
+
+  /* Adjust the issue row positions */
+  .issue-row-1 {
+    top: 12%; /* Moved slightly up from 15% */
+  }
+
+  .issue-row-3 {
+    top: 88%; /* Moved slightly down from 85% */
+  }
+}
+
+@media (max-width: 480px) {
+  .star-circle {
+    width: 180px; /* Even smaller for very small screens */
+    height: 180px;
+  }
+
+  .star-container::before,
+  .star-container::after {
+    width: 180px;
+    height: 180px;
+  }
+
+  .marquee-wrapper {
+    height: 160px; /* Further reduced for very small screens */
+  }
+
+  /* Further adjust the issue row positions for very small screens */
+  .issue-row-1 {
+    top: 10%; /* Even closer to the top */
+  }
+
+  .issue-row-3 {
+    top: 90%; /* Even closer to the bottom */
+  }
+
+  /* Reduce tag size on very small screens */
+  .tag {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.85rem;
+    margin: 0 0.4rem;
+  }
 }
 
 /* Style individual arrow segments if using specific grid areas */
@@ -547,6 +614,13 @@
     inset 0 1px 1px rgba(255, 255, 255, 0.05);
   overflow: hidden;
   isolation: isolate; /* Create a new stacking context */
+  transition: all 0.5s ease-in-out; /* Add smooth transition */
+}
+
+/* Also add transitions to child containers */
+.conversation-container,
+.info-container {
+  transition: all 0.5s ease-in-out;
 }
 
 /* Rename this class to better reflect the blue color */
@@ -1082,11 +1156,91 @@
     flex-direction: column;
     gap: 3rem;
     padding: 1.5rem;
+    margin-left: 8px;
+    margin-right: 8px;
+    width: calc(100% - 16px);
+    max-width: calc(100% - 16px);
   }
 
   .conversation-container,
   .info-container {
     flex: 1; /* Reset to full width on mobile */
+    width: 100%;
+    max-width: 100%;
+    padding: 0.75rem;
+  }
+
+  .conversation-box {
+    max-width: 100%;
+    width: 100%;
+    transform: none !important; /* Prevent the hover transform on mobile */
+  }
+
+  .conversation-box:hover {
+    transform: none !important; /* Ensure no transform on mobile */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6),
+      0 0 0 1px rgba(255, 255, 255, 0.08);
+  }
+
+  .conversation-items {
+    max-height: none; /* Remove max-height to allow content to display fully */
+    height: auto;
+    padding: 24px 20px;
+  }
+
+  /* Reorder the student section on mobile to show info first */
+  .image-split-section:not(.faculty-staff-section) {
+    display: flex;
+    flex-direction: column-reverse; /* Reverse the order so info is at the top */
+  }
+
+  /* Keep normal order for faculty-staff section since info is already first */
+  .faculty-staff-section {
+    display: flex;
+    flex-direction: column; /* Normal order since info is already first in DOM */
+  }
+
+  /* Improve spacing for the info container on mobile */
+  .info-container {
+    padding: 1.25rem 1rem 2rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+
+  /* Center the info content on mobile */
+  .info-content {
+    margin: 0 auto;
+    text-align: center;
+    max-width: 100%; /* Allow content to grow */
+    width: 100%;
+    padding: 0 0.5rem;
+  }
+
+  /* Make the list items more readable on mobile */
+  .info-list li {
+    text-align: left;
+    padding: 0.8rem 1rem;
+    margin-bottom: 1.2rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border-left: 3px solid rgba(234, 179, 8, 0.7);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    width: 100%;
+  }
+
+  .message-content {
+    max-width: 85%; /* Increase max-width from 75% to 85% */
+  }
+
+  /* Make the strong tag stand out more on mobile */
+  .info-list li strong {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 1.05rem;
+    color: rgba(234, 179, 8, 1);
   }
 
   .conversation-box,
@@ -1100,6 +1254,99 @@
 
   .info-subtitle {
     font-size: 2.5rem;
+    margin-bottom: 2rem; /* Reduce space between subtitle and list */
+  }
+
+  /* Adjust the conversation container margin on mobile */
+  .conversation-container {
+    margin-top: 1rem;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .image-split-section {
+    padding: 1.25rem;
+    margin-left: 6px;
+    margin-right: 6px;
+    width: calc(100% - 12px);
+    max-width: calc(100% - 12px);
+    border-radius: 20px;
+    gap: 2rem; /* Reduce gap on very small screens */
+  }
+
+  .conversation-container {
+    padding: 0.5rem;
+  }
+
+  .info-container {
+    padding: 1rem 0.75rem 1.5rem;
+  }
+
+  .conversation-items {
+    padding: 20px 16px;
+  }
+
+  .message-content {
+    max-width: 90%; /* Even wider messages on very small screens */
+  }
+
+  .message-header {
+    padding: 12px 14px 10px;
+  }
+
+  .message-text {
+    padding: 14px 16px;
+    font-size: 0.9rem;
+  }
+
+  .avatar-img {
+    width: 26px;
+    height: 26px;
+  }
+
+  .message-label {
+    font-size: 0.95rem;
+  }
+
+  /* Adjust title sizes on very small screens */
+  .info-title {
+    font-size: 3rem;
+  }
+
+  .info-subtitle {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .info-list li {
+    margin-bottom: 1rem;
+    padding: 0.7rem 0.9rem;
+  }
+}
+
+/* Landscape mode on mobile */
+@media (max-width: 900px) and (orientation: landscape) {
+  .image-split-section {
+    padding: 1.5rem 2rem;
+  }
+
+  .conversation-items {
+    max-height: 350px; /* Limit height in landscape mode */
+    overflow-y: auto;
+  }
+
+  .conversation-box {
+    max-height: 400px; /* Limit overall height */
+  }
+
+  .info-title {
+    font-size: 3rem;
+  }
+
+  .info-subtitle {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
   }
 }
 

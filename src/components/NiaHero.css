@@ -69,6 +69,83 @@
   transform: rotate(-12deg);
 }
 
+/* Enhanced button styles */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 15px rgba(104, 66, 185, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(62, 182, 209, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(104, 66, 185, 0.5);
+  }
+}
+
+.meet-nia-button {
+  background: linear-gradient(90deg, #3eb6d1, #6842b9) !important;
+  color: white !important;
+  font-weight: 600 !important;
+  border: none !important;
+  box-shadow: 0 0 15px rgba(104, 66, 185, 0.5) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  padding: 0.8rem 2rem !important;
+  border-radius: 25px !important;
+  transform: translateY(0) !important;
+  transition: all 0.3s ease !important;
+  letter-spacing: 0.5px !important;
+  font-size: 1.1rem !important;
+  animation: pulse 3s infinite !important;
+}
+
+/* Header button style */
+.hero-header .fwl-button {
+  background: linear-gradient(90deg, #3eb6d1, #6842b9) !important;
+  color: white !important;
+  font-weight: 600 !important;
+  border: none !important;
+  box-shadow: 0 0 10px rgba(104, 66, 185, 0.5) !important;
+  padding: 0.7rem 1.8rem !important;
+  border-radius: 25px !important;
+  transform: translateY(0) !important;
+  transition: all 0.3s ease !important;
+  letter-spacing: 0.5px !important;
+  font-size: 0.95rem !important;
+  animation: pulse 3s infinite !important;
+}
+
+.hero-header .fwl-button:hover {
+  background: linear-gradient(90deg, #6842b9, #3eb6d1) !important;
+  box-shadow: 0 0 15px rgba(62, 182, 209, 0.7) !important;
+  transform: translateY(-2px) !important;
+}
+
+.hero-header .fwl-button:active {
+  transform: translateY(1px) !important;
+  box-shadow: 0 0 8px rgba(104, 66, 185, 0.4) !important;
+}
+
+.button-arrow-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  margin-left: 0.5rem;
+}
+
+.meet-nia-button:hover {
+  background: linear-gradient(90deg, #6842b9, #3eb6d1) !important;
+  box-shadow: 0 0 20px rgba(62, 182, 209, 0.7) !important;
+  transform: translateY(-3px) !important;
+}
+
+.meet-nia-button:active {
+  transform: translateY(1px) !important;
+  box-shadow: 0 0 10px rgba(104, 66, 185, 0.4) !important;
+}
+
 /* Responsive styles */
 @media (max-width: 768px) {
   .hero-sentence {
@@ -103,6 +180,12 @@
   .hero-content {
     padding-bottom: 2vh; /* Less space on mobile */
     margin-top: 30vh; /* Move content down on mobile */
+  }
+
+  /* Responsive button sizing */
+  .meet-nia-button {
+    padding: 0.7rem 1.8rem !important;
+    font-size: 1rem !important;
   }
 }
 
@@ -142,5 +225,10 @@
   /* Adjust positioning for very small screens */
   .hero-content {
     margin-top: 25vh; /* Move content down less on small screens */
+  }
+
+  .meet-nia-button {
+    padding: 0.6rem 1.5rem !important;
+    font-size: 0.95rem !important;
   }
 }
