@@ -25,6 +25,11 @@
   transform: translateX(100px); /* Exit position for leaving sentences */
 }
 
+/* Content positioning */
+.hero-content {
+  padding-bottom: 10vh; /* Add space between content and video */
+}
+
 /* Header styles */
 .hero-header {
   position: absolute;
@@ -35,13 +40,33 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 3rem;
-  z-index: 2;
+  z-index: 10; /* Increased z-index to ensure clickability */
 }
 
 .hero-logo-container {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+}
+
+/* Nia logo and introducing text styles */
+.nia-logo {
+  height: 12rem;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 0 1px white) drop-shadow(0 0 1px white);
+}
+
+.introducing-stamp {
+  display: inline-block;
+  padding: 0.15rem 0.7rem;
+  line-height: 1;
+  border: 2px solid #fff;
+  border-radius: 0.5rem;
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #fff;
+  transform: rotate(-12deg);
 }
 
 /* Responsive styles */
@@ -63,6 +88,22 @@
     width: 100%;
     justify-content: center;
   }
+
+  /* Responsive scaling for Nia logo and introducing text */
+  .nia-logo {
+    height: 8rem; /* Smaller on mobile */
+  }
+
+  .introducing-stamp {
+    font-size: 1.5rem; /* Smaller on mobile */
+    padding: 0.1rem 0.5rem;
+  }
+
+  /* Move content closer to video on mobile */
+  .hero-content {
+    padding-bottom: 2vh; /* Less space on mobile */
+    margin-top: 30vh; /* Move content down on mobile */
+  }
 }
 
 /* Additional breakpoint for medium screens */
@@ -70,5 +111,36 @@
   .hero-sentence {
     padding: 0 2rem; /* Add more horizontal padding on medium screens */
     font-size: 0.95em; /* Slightly reduced font size */
+  }
+
+  .nia-logo {
+    height: 10rem; /* Medium size for tablet screens */
+  }
+
+  .introducing-stamp {
+    font-size: 1.8rem; /* Medium size for tablet screens */
+  }
+
+  /* Position content on tablets */
+  .hero-content {
+    padding-bottom: 5vh; /* Medium space on tablets */
+    margin-top: 20vh; /* Move content down on tablets */
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .nia-logo {
+    height: 6rem; /* Even smaller for very small screens */
+  }
+
+  .introducing-stamp {
+    font-size: 1.2rem;
+    padding: 0.1rem 0.4rem;
+  }
+
+  /* Adjust positioning for very small screens */
+  .hero-content {
+    margin-top: 25vh; /* Move content down less on small screens */
   }
 }

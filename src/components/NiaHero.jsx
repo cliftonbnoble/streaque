@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 // Comment out Three.js import as it's only needed for Vanta
 // import * as THREE from 'three';
 // Removed import for CustomWavesEffect
@@ -102,7 +102,7 @@ export default function NiaHero({ onJoinWaitlistClick }) {
     display: 'flex',     // Use flex to help center content vertically
     flexDirection: 'column',
     alignItems: 'center', // Center horizontally
-    justifyContent: 'space-between', // Changed to space-between to push content apart
+    justifyContent: 'center', // Changed from space-between to center for better vertical alignment
   };
 
   // Add style for the image logo
@@ -121,7 +121,8 @@ export default function NiaHero({ onJoinWaitlistClick }) {
     maxWidth: '896px', // max-w-4xl approx
     padding: '4rem 1.5rem', // Increased top padding, px-6
     textAlign: 'center',
-    marginTop: '10vh', // Add margin at the top to push content down from header
+    marginTop: 'auto', // Changed from fixed 10vh to auto to enable flexbox vertical centering
+    marginBottom: 'auto', // Added to help center vertically with flexbox
     // Removed height: '90vh' and margin: '0 auto' as flexbox on section handles centering
   };
 
@@ -135,31 +136,6 @@ export default function NiaHero({ onJoinWaitlistClick }) {
     alignItems: 'center', // Keep horizontal centering
     // justifyContent: 'center', // Remove (not needed for column centering)
     gap: '0.2rem', // Small gap for closeness
-  };
-
-  // Style for "Introducing" stamp
-  const introducingStyle = {
-    display: 'inline-block',
-    padding: '0.15rem 0.7rem', // Reduced padding for tighter fit
-    lineHeight: 1, // Set line height to minimize extra space
-    border: '2px solid #fff', // White border
-    borderRadius: '0.5rem', // Rounded corners
-    // backgroundColor: 'rgba(0, 0, 0, 0.2)', // Removed background color
-    fontSize: '2.2rem', // Increased font size (was 1.8rem)
-    fontWeight: 600, // Slightly bold
-    color: '#fff',
-    transform: 'rotate(-12deg)', // Keep rotation
-    // marginBottom: '0.5rem', // Remove margin bottom, no longer needed
-  };
-
-  // Remove unused gradientSpanStyle
-
-  // Style for the Nia hero logo image
-  const niaLogoStyle = {
-    height: '12rem', // Reduced height (was 24rem)
-    width: 'auto',
-    display: 'block',
-    filter: 'drop-shadow(0 0 1px white) drop-shadow(0 0 1px white)', // Added thin white outline
   };
 
   const pStyle = {
@@ -177,7 +153,7 @@ export default function NiaHero({ onJoinWaitlistClick }) {
     position: 'absolute',
     left: 0,
     width: '100%',
-    height: '50%', // Reduce container height
+    height: '45%', // Reduced height slightly (was 50%)
     overflow: 'hidden',
     zIndex: 1,
     bottom: 0, // Position at bottom
@@ -242,10 +218,10 @@ export default function NiaHero({ onJoinWaitlistClick }) {
       </header>
 
       {/* Hero Content Container */}
-      <div style={contentStyle}>
+      <div style={contentStyle} className="hero-content">
         <h1 style={h1Style}>
-          <span style={introducingStyle}>Introducing</span>
-          <img src={niaHeroLogo} alt="Nia Hero Logo" style={niaLogoStyle} />
+          <span className="introducing-stamp">Introducing</span>
+          <img src={niaHeroLogo} alt="Nia Hero Logo" className="nia-logo" />
         </h1>
 
         {/* Apply animation class based on isFadingOut state */}

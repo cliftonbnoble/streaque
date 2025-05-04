@@ -2,7 +2,15 @@ import React, { useState, useRef, useEffect } from 'react';
 import './EmailCapturePopup.css';
 
 function EmailCapturePopup({ isVisible, onClose, logo }) {
-  const [email, setEmail] = useState('');
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    isOrganization: false,
+    organizationName: '',
+    isInvestor: false,
+    isOther: false
+  });
   const [submitStatus, setSubmitStatus] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const formRef = useRef(null);
@@ -13,6 +21,15 @@ function EmailCapturePopup({ isVisible, onClose, logo }) {
   
   // Google Apps Script URL
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyfbh40VFHv1DG3H5-1vFOA7_ZgSV4skPY_r2JwK_h6KQ_c_GVTyV1c13_Cwnp8o_-osA/exec';
+
+  // Handle form field changes
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === 'checkbox' ? checked : value
+    });
+  };
 
   // Generate a new captcha question
   const generateCaptcha = () => {
@@ -27,6 +44,15 @@ function EmailCapturePopup({ isVisible, onClose, logo }) {
   useEffect(() => {
     if (isVisible) {
       generateCaptcha();
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        isOrganization: false,
+        organizationName: '',
+        isInvestor: false,
+        isOther: false
+      });
     }
   }, [isVisible]);
 
@@ -39,9 +65,26 @@ function EmailCapturePopup({ isVisible, onClose, logo }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     
+    // Validate required fields
+    if (!formData.firstName.trim()) {
+      setSubmitStatus('First name is required.');
+      return;
+    }
+    
+    if (!formData.lastName.trim()) {
+      setSubmitStatus('Last name is required.');
+      return;
+    }
+    
     // Validate email
-    if (!validateEmail(email)) {
+    if (!validateEmail(formData.email)) {
       setSubmitStatus('Please enter a valid email address.');
+      return;
+    }
+    
+    // Validate organization name if organization is checked
+    if (formData.isOrganization && !formData.organizationName.trim()) {
+      setSubmitStatus('Organization/School name is required.');
       return;
     }
     
@@ -57,8 +100,20 @@ function EmailCapturePopup({ isVisible, onClose, logo }) {
     
     try {
       // Using URLSearchParams to create form data
-      const formData = new URLSearchParams();
-      formData.append('email', email);
+      const params = new URLSearchParams();
+      params.append('firstName', formData.firstName);
+      params.append('lastName', formData.lastName);
+      params.append('email', formData.email);
+      params.append('isOrganization', formData.isOrganization ? 'Yes' : 'No');
+      
+      if (formData.isOrganization) {
+        params.append('organizationName', formData.organizationName);
+      } else {
+        params.append('organizationName', '');
+      }
+      
+      params.append('isInvestor', formData.isInvestor ? 'Yes' : 'No');
+      params.append('isOther', formData.isOther ? 'Yes' : 'No');
       
       // Using no-cors mode to bypass CORS issues
       await fetch(SCRIPT_URL, {
@@ -67,12 +122,20 @@ function EmailCapturePopup({ isVisible, onClose, logo }) {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: formData
+        body: params
       });
       
       // Since response is opaque with no-cors, we assume success if no error is thrown
       console.log('Form submitted');
-      setEmail('');
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        isOrganization: false,
+        organizationName: '',
+        isInvestor: false,
+        isOther: false
+      });
       setCaptchaAnswer('');
       setSubmitStatus('Success! Thank you for joining our waitlist.');
       setIsSubmitting(false);
@@ -82,7 +145,7 @@ function EmailCapturePopup({ isVisible, onClose, logo }) {
         setSubmitStatus('');
       }, 2000);
     } catch (error) {
-      console.error('Error submitting email:', error);
+      console.error('Error submitting form:', error);
       setSubmitStatus('Something went wrong. Please try again.');
       setIsSubmitting(false);
     }
@@ -100,21 +163,90 @@ function EmailCapturePopup({ isVisible, onClose, logo }) {
         <h2>Join our waitlist</h2>
         <p>Two tools. One AI. Infinite impact.</p>
         <form onSubmit={handleSubmit} ref={formRef}>
+          <div className="name-fields">
+            <input
+              type="text"
+              name="firstName"
+              placeholder="First Name"
+              value={formData.firstName}
+              onChange={handleInputChange}
+              required
+              disabled={isSubmitting}
+            />
+            <input
+              type="text"
+              name="lastName"
+              placeholder="Last Name"
+              value={formData.lastName}
+              onChange={handleInputChange}
+              required
+              disabled={isSubmitting}
+            />
+          </div>
           <input
             type="email"
             name="email"
             placeholder="Email Address"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={formData.email}
+            onChange={handleInputChange}
             required
             disabled={isSubmitting}
           />
+          <div className="checkbox-container">
+            <div className="checkbox-item">
+              <input
+                type="checkbox"
+                id="organization"
+                name="isOrganization"
+                checked={formData.isOrganization}
+                onChange={handleInputChange}
+                disabled={isSubmitting}
+              />
+              <label htmlFor="organization">Organization/School</label>
+            </div>
+            <div className="checkbox-item">
+              <input
+                type="checkbox"
+                id="investor"
+                name="isInvestor"
+                checked={formData.isInvestor}
+                onChange={handleInputChange}
+                disabled={isSubmitting}
+              />
+              <label htmlFor="investor">Investor</label>
+            </div>
+            <div className="checkbox-item">
+              <input
+                type="checkbox"
+                id="other"
+                name="isOther"
+                checked={formData.isOther}
+                onChange={handleInputChange}
+                disabled={isSubmitting}
+              />
+              <label htmlFor="other">Other</label>
+            </div>
+          </div>
+          
+          {formData.isOrganization && (
+            <input
+              type="text"
+              name="organizationName"
+              placeholder="Organization/School Name"
+              value={formData.organizationName}
+              onChange={handleInputChange}
+              required
+              disabled={isSubmitting}
+              className="organization-field"
+            />
+          )}
+          
           <div className="captcha-container">
             <label className="captcha-question">
               {captchaQuestion.num1} + {captchaQuestion.num2} = ?
             </label>
             <input
-              type="number"
+              type="text"
               className="captcha-input"
               value={captchaAnswer}
               onChange={(e) => setCaptchaAnswer(e.target.value)}
