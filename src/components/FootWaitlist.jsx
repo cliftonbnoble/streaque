@@ -41,7 +41,9 @@ const FootWaitlist = ({ onJoinWaitlistClick }) => {
         </div>
         
         <div className="fwl-column fwl-right">
-          {/* Empty column for future content */}
+          <div className="fwl-copyright">
+            All Rights Reserved | Streaque 2025
+          </div>
         </div>
       </div>
     </footer>

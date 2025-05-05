@@ -42,10 +42,17 @@
   gap: 1rem;
 }
 
-/* Right column (empty for now) */
+/* Right column (copyright text) */
 .fwl-right {
   align-items: flex-end;
   justify-content: flex-end;
+}
+
+.fwl-copyright {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: right;
+  white-space: nowrap;
 }
 
 /* Style for the hero sentence in the footer */
@@ -135,7 +142,14 @@
   }
 
   .fwl-right {
-    display: none; /* Hide the empty column on mobile */
+    order: 3;
+    align-items: center;
+    display: flex; /* Show the copyright on mobile */
+    margin-top: 1rem;
+  }
+
+  .fwl-copyright {
+    text-align: center;
   }
 
   .fwl-center .hero-sentence {
@@ -158,7 +172,11 @@
   }
 
   .fwl-container {
-    gap: 2rem;
+    gap: 1.5rem;
+  }
+
+  .fwl-right {
+    margin-top: 0.75rem;
   }
 
   .fwl-center .hero-sentence {
