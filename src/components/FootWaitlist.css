@@ -15,27 +15,57 @@
   width: 100%;
   max-width: 1280px;
   display: flex;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-end;
   position: relative;
   padding: 0 1rem;
 }
 
-.fwl-content {
+/* Column styles */
+.fwl-column {
+  flex: 1;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  width: 100%;
-  position: relative;
-  z-index: 2;
+}
+
+/* Left column with logo */
+.fwl-left {
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+/* Center column with button and text */
+.fwl-center {
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+/* Right column (empty for now) */
+.fwl-right {
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+/* Style for the hero sentence in the footer */
+.fwl-center .hero-sentence {
+  margin: 0;
+  min-height: auto;
+  opacity: 1;
+  transform: none;
+  font-size: 1.2rem;
+  color: white;
+  text-align: center;
+  white-space: normal;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
 }
 
 .fwl-logo {
-  position: absolute;
-  left: 0;
   height: 48px;
   width: auto;
   display: block;
-  z-index: 3;
 }
 
 .fwl-button {
@@ -86,23 +116,37 @@
 
   .fwl-container {
     flex-direction: column;
-    gap: 2rem;
+    align-items: center;
+    gap: 2.5rem;
   }
 
-  .fwl-content {
+  .fwl-column {
     width: 100%;
   }
 
-  .fwl-logo {
-    position: static;
-    margin-bottom: 1.5rem;
+  .fwl-left {
+    align-items: center;
+    order: 1;
+  }
+
+  .fwl-center {
+    order: 2;
+    gap: 1.2rem;
+  }
+
+  .fwl-right {
+    display: none; /* Hide the empty column on mobile */
+  }
+
+  .fwl-center .hero-sentence {
+    font-size: 1.1rem;
+    margin-bottom: 0;
   }
 
   /* Improve button clickability on tablets */
-  .fwl-content .meet-nia-button {
+  .fwl-center .meet-nia-button {
     min-width: 200px;
     padding: 0.8rem 2rem;
-    margin: 0 auto;
   }
 }
 
@@ -114,16 +158,19 @@
   }
 
   .fwl-container {
-    gap: 1.5rem;
+    gap: 2rem;
+  }
+
+  .fwl-center .hero-sentence {
+    font-size: 1rem;
   }
 
   .fwl-logo {
     height: 40px;
-    margin-bottom: 1rem;
   }
 
   /* Enhance mobile button for better touch target */
-  .fwl-content .meet-nia-button {
+  .fwl-center .meet-nia-button {
     min-width: 220px;
     min-height: 44px; /* Ensure good tap target size */
     padding: 0.7rem 1.8rem;
@@ -133,7 +180,7 @@
 }
 
 /* Active state for mobile touch feedback */
-.fwl-content .meet-nia-button:active {
+.fwl-center .meet-nia-button:active {
   transform: translateY(1px);
   transition: transform 0.1s;
 }

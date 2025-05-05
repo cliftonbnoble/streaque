@@ -9,9 +9,14 @@ const FootWaitlist = ({ onJoinWaitlistClick }) => {
       <div className="fwl-separator"></div>
       
       <div className="fwl-container">
-        <img src={streaqueLogo} alt="Streaque Logo" className="fwl-logo" />
+        <div className="fwl-column fwl-left">
+          <img src={streaqueLogo} alt="Streaque Logo" className="fwl-logo" />
+        </div>
         
-        <div className="fwl-content">
+        <div className="fwl-column fwl-center">
+          <div className="hero-sentence fade-in">
+            Streamline support and drive student success with AI
+          </div>
           <button
             type="button"
             onClick={onJoinWaitlistClick}
@@ -33,6 +38,10 @@ const FootWaitlist = ({ onJoinWaitlistClick }) => {
               />
             </svg>
           </button>
+        </div>
+        
+        <div className="fwl-column fwl-right">
+          {/* Empty column for future content */}
         </div>
       </div>
     </footer>

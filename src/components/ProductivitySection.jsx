@@ -174,7 +174,11 @@ export default function ProductivitySection() {
     <section className="productivity-section">
       {/* Centered Content Wrapper */}
       <div className="productivity-content">
-        <h2 className="productivity-heading">Two tools. One AI. Infinite Impact.</h2>
+        <h2 className="productivity-heading">
+          <span className="heading-segment">Two tools.</span>{' '}
+          <span className="heading-segment">One AI.</span>{' '}
+          <span className="heading-segment">Infinite Impact.</span>
+        </h2>
       </div>
 
       <div className="marquee-wrapper">

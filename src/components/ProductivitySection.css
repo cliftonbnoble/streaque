@@ -55,6 +55,33 @@
 
 .productivity-heading {
   font-size: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  line-height: 1.2;
+}
+
+.heading-segment {
+  display: inline-block;
+}
+
+/* On medium screens, start breaking at periods */
+@media (max-width: 768px) {
+  .productivity-heading {
+    font-size: 2.5rem;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.25rem;
+  }
+}
+
+/* On small screens, make text smaller */
+@media (max-width: 480px) {
+  .productivity-heading {
+    font-size: 2rem;
+  }
 }
 
 .marquee-wrapper {
