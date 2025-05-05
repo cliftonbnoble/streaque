@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 // import * as THREE from 'three';
 // Removed import for CustomWavesEffect
 import streaqueLogo from '../assets/streaque-logo.png'; // Header logo
-import niaHeroLogo from '../assets/nia-hero-logo.png'; // Import the Nia hero logo
+// import niaHeroLogo from '../assets/nia-hero-logo.png'; // Import the Nia hero logo (commented out)
+import NiaText from './NiaText'; // Import the NiaText component
 import './NiaHero.css'; // Import the new CSS file
 
 const sentences = [
@@ -221,7 +222,14 @@ export default function NiaHero({ onJoinWaitlistClick }) {
       <div style={contentStyle} className="hero-content">
         <h1 style={h1Style}>
           <span className="introducing-stamp">Introducing</span>
-          <img src={niaHeroLogo} alt="Nia Hero Logo" className="nia-logo" />
+          {/* <img src={niaHeroLogo} alt="Nia Hero Logo" className="nia-logo" /> */}
+          <NiaText 
+            text="Nia" 
+            fontSize="calc(10rem)" 
+            primaryColor="#3eb6d1" 
+            secondaryColor="#6842b9"
+            style={{ marginTop: '0' }}
+          />
         </h1>
 
         {/* Apply animation class based on isFadingOut state */}

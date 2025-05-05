@@ -15,7 +15,7 @@ const FootWaitlist = ({ onJoinWaitlistClick }) => {
         
         <div className="fwl-column fwl-center">
           <div className="hero-sentence fade-in">
-            Streamline support and drive student success with AI
+          AI-powered support for student and staff success
           </div>
           <button
             type="button"

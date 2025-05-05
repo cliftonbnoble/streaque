@@ -11,12 +11,14 @@ const NiaText = ({
 }) => {
   return (
     <div className={`nia-container ${className}`} style={{
-      height: '150px',
+      height: '200px',
       width: '100%',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
       position: 'relative',
+      padding: '0',
+      margin: '0',
       ...style
     }}>
       {/* Blurred background layer */}
@@ -27,8 +29,8 @@ const NiaText = ({
         alignItems: 'center',
         width: '100%',
         height: '100%',
-        filter: 'blur(30px)',
-        transform: 'scaleY(1.2)',
+        filter: 'blur(40px)',
+        transform: 'scaleY(1.5) scale(1.2)',
         zIndex: 0
       }}>
         <div className="nia-text" style={{
@@ -61,9 +63,9 @@ const NiaText = ({
             lineHeight: 1, 
             fontWeight: 700, 
             fontFamily: "'Kaushan Script', cursive",
-            WebkitTextStroke: '3px rgba(255, 255, 255, 0.35)',
+            WebkitTextStroke: '4px rgba(255, 255, 255, 0.45)',
             color: 'transparent',
-            filter: 'blur(4px) brightness(1.2)'
+            filter: 'blur(6px) brightness(1.4)'
           }}>{text}</span>
         </div>
       </div>
@@ -76,7 +78,8 @@ const NiaText = ({
         alignItems: 'center',
         width: '100%',
         height: '100%',
-        zIndex: 15
+        zIndex: 15,
+        filter: 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4))'
       }}>
         <div className="nia-text-stroke">
           <span style={{ 
@@ -84,7 +87,7 @@ const NiaText = ({
             lineHeight: 1, 
             fontWeight: 700, 
             fontFamily: "'Kaushan Script', cursive",
-            WebkitTextStroke: `1px rgba(${hexToRgb(primaryColor)}, 0.8)`,
+            WebkitTextStroke: `2px rgba(${hexToRgb(primaryColor)}, 0.9)`,
             color: 'transparent'
           }}>{text}</span>
         </div>
