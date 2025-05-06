@@ -64,7 +64,7 @@
   font-size: 1.2rem;
   color: white;
   text-align: center;
-  white-space: normal;
+  white-space: nowrap;
   line-height: 1.4;
   margin-bottom: 0.5rem;
 }
@@ -155,6 +155,7 @@
   .fwl-center .hero-sentence {
     font-size: 1.1rem;
     margin-bottom: 0;
+    white-space: normal;
   }
 
   /* Improve button clickability on tablets */
@@ -181,6 +182,7 @@
 
   .fwl-center .hero-sentence {
     font-size: 1rem;
+    white-space: normal;
   }
 
   .fwl-logo {
