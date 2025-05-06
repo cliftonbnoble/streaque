@@ -329,7 +329,7 @@ export default function ProductivitySection() {
                     <div className="message-label">Support Agent</div>
                   </div>
                   <div className="message-text">
-                    <span className="processing-text">Need help finding your Zoom link or class recording from yesterday?</span>
+                    <span className="processing-text">Need help finding the Zoom link or class recording from yesterday?</span>
                     <span className="processing-dot">•</span>
                     <span className="processing-dot">•</span>
                     <span className="processing-dot">•</span>

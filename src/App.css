@@ -71,9 +71,3 @@ html {
 .read-the-docs {
   color: #888;
 }
-
-/* Force Vanta canvas to fill its container */
-.vanta-canvas {
-  width: 100% !important;
-  height: 100% !important;
-}

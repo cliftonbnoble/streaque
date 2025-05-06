@@ -19,8 +19,15 @@ function EmailCapturePopup({ isVisible, onClose, logo }) {
   const [captchaAnswer, setCaptchaAnswer] = useState('');
   const [captchaQuestion, setCaptchaQuestion] = useState({});
   
-  // Google Apps Script URL
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyfbh40VFHv1DG3H5-1vFOA7_ZgSV4skPY_r2JwK_h6KQ_c_GVTyV1c13_Cwnp8o_-osA/exec';
+  // Google Apps Script URL from environment variable
+  const SCRIPT_URL = import.meta.env.VITE_GOOGLE_SHEETS_SCRIPT;
+  
+  // Log a warning if the environment variable is not set
+  useEffect(() => {
+    if (!SCRIPT_URL) {
+      console.error('VITE_GOOGLE_SHEETS_SCRIPT environment variable is not set. Form submissions will not work.');
+    }
+  }, []);
 
   // Handle form field changes
   const handleInputChange = (e) => {
@@ -92,6 +99,13 @@ function EmailCapturePopup({ isVisible, onClose, logo }) {
     if (parseInt(captchaAnswer, 10) !== captchaQuestion.answer) {
       setSubmitStatus('Incorrect captcha answer. Please try again.');
       generateCaptcha();
+      return;
+    }
+
+    // Check if script URL is available
+    if (!SCRIPT_URL) {
+      setSubmitStatus('Form submission is currently unavailable. Please try again later.');
+      console.error('Missing SCRIPT_URL environment variable');
       return;
     }
     

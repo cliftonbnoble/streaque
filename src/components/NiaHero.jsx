@@ -1,11 +1,9 @@
-import { useEffect, useState } from 'react';
-// Comment out Three.js import as it's only needed for Vanta
-// import * as THREE from 'three';
-// Removed import for CustomWavesEffect
+import React, { useEffect, useState } from 'react';
 import streaqueLogo from '../assets/streaque-logo.png'; // Header logo
-// import niaHeroLogo from '../assets/nia-hero-logo.png'; // Import the Nia hero logo (commented out)
-import NiaText from './NiaText'; // Import the NiaText component
+import niaHeroLogo from '../assets/nia-hero-logo.png'; // Import the Nia hero logo (commented out)
+import NiaText from './NiaText.jsx'; // Import the NiaText component
 import './NiaHero.css'; // Import the new CSS file
+import JoinWaitlist from './JoinWaitlist.jsx';
 
 const sentences = [
   "The AI partner transforming student success and staff workflows.",
@@ -17,59 +15,9 @@ const sentences = [
   "The AI co-pilot unifying student support and supercharging staff efficiency"
 ];
 
-export default function NiaHero({ onJoinWaitlistClick }) {
-  // Remove unused refs
+function NiaHero({ onJoinWaitlistClick }) {
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
   const [isFadingOut, setIsFadingOut] = useState(false); // State for animation
-
-  useEffect(() => {
-    // Comment out Vanta initialization
-    /*
-    // Debug logging to check Vanta availability
-    console.log("Vanta available:", window.VANTA ? "Yes" : "No");
-    console.log("Vanta FOG available:", window.VANTA && window.VANTA.FOG ? "Yes" : "No");
-    
-    // Initialize using window.VANTA.FOG instead of RINGS
-    if (vantaRef.current && window.VANTA && !vantaInstance.current) {
-      try {
-        // Check if FOG effect is available
-        if (!window.VANTA.FOG) {
-          console.error("VANTA.FOG effect is not available. Available effects:", Object.keys(window.VANTA));
-          return;
-        }
-        
-        console.log("Initializing VANTA.FOG with params");
-        vantaInstance.current = window.VANTA.FOG({
-          el: vantaRef.current,
-          THREE: THREE, // Pass the imported THREE
-          mouseControls: true,
-          touchControls: true,
-          gyroControls: false,
-          minHeight: 200.00,
-          minWidth: 200.00,
-          highlightColor: 0xd4e64d,
-          midtoneColor: 0x56a6e6,
-          lowlightColor: 0xb299f2,
-          baseColor: 0x000000,
-          blurFactor: 0.66,
-          speed: 1.50,
-          zoom: 0.30
-        });
-        console.log("VANTA.FOG initialization successful");
-      } catch (error) {
-        console.error('Error initializing Vanta:', error);
-      }
-    }
-
-    // Cleanup method
-    return () => {
-      if (vantaInstance.current && typeof vantaInstance.current.destroy === 'function') {
-          vantaInstance.current.destroy();
-      }
-      vantaInstance.current = null;
-    };
-    */
-  }, []);
 
   // Effect for cycling sentences
   useEffect(() => {
@@ -188,7 +136,7 @@ export default function NiaHero({ onJoinWaitlistClick }) {
   };
 
   return (
-    <section style={sectionStyle}>
+    <section style={sectionStyle} className="nia-hero">
       {/* Video background */}
       <div style={videoContainerStyle}>
         <video 
@@ -222,14 +170,14 @@ export default function NiaHero({ onJoinWaitlistClick }) {
       <div style={contentStyle} className="hero-content">
         <h1 style={h1Style}>
           <span className="introducing-stamp">Introducing</span>
-          {/* <img src={niaHeroLogo} alt="Nia Hero Logo" className="nia-logo" /> */}
-          <NiaText 
+          <img src={niaHeroLogo} alt="Nia Hero Logo" className="nia-logo" />
+          {/* <NiaText 
             text="Nia" 
             fontSize="calc(10rem)" 
             primaryColor="#3eb6d1" 
             secondaryColor="#6842b9"
             style={{ marginTop: '0' }}
-          />
+          /> */}
         </h1>
 
         {/* Apply animation class based on isFadingOut state */}
@@ -250,11 +198,14 @@ export default function NiaHero({ onJoinWaitlistClick }) {
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+              d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
             />
           </svg>
         </button>
       </div>
+      <JoinWaitlist onJoinWaitlistClick={onJoinWaitlistClick} />
     </section>
   );
 }
+
+export default NiaHero;
