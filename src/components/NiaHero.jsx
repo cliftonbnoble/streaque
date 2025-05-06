@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import streaqueLogo from '../assets/streaque-logo.png'; // Header logo
 import niaHeroLogo from '../assets/nia-hero-logo.png'; // Import the Nia hero logo (commented out)
 import NiaText from './NiaText.jsx'; // Import the NiaText component
@@ -18,6 +18,9 @@ const sentences = [
 function NiaHero({ onJoinWaitlistClick }) {
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
   const [isFadingOut, setIsFadingOut] = useState(false); // State for animation
+  const [videoLoaded, setVideoLoaded] = useState(false); // Track video loading state
+  const [videoLoadProgress, setVideoLoadProgress] = useState(0); // Track loading progress
+  const videoRef = useRef(null); // Add ref to access video element
 
   // Effect for cycling sentences
   useEffect(() => {
@@ -38,6 +41,51 @@ function NiaHero({ onJoinWaitlistClick }) {
     // Cleanup interval on component unmount
     return () => clearInterval(intervalId);
   }, []); // Empty dependency array ensures this runs only once on mount
+
+  // Set up video loading events
+  useEffect(() => {
+    const videoElement = videoRef.current;
+    if (!videoElement) return;
+    
+    // Handle successful loading events
+    const handleVideoLoaded = () => {
+      setVideoLoaded(true);
+    };
+    
+    // Try to detect if video is already loaded
+    if (videoElement.readyState >= 3) {
+      handleVideoLoaded();
+    }
+    
+    // Multiple event listeners for different browser behaviors
+    videoElement.addEventListener('canplay', handleVideoLoaded);
+    videoElement.addEventListener('canplaythrough', handleVideoLoaded);
+    videoElement.addEventListener('loadeddata', handleVideoLoaded);
+    
+    // Cleanup function
+    return () => {
+      videoElement.removeEventListener('canplay', handleVideoLoaded);
+      videoElement.removeEventListener('canplaythrough', handleVideoLoaded);
+      videoElement.removeEventListener('loadeddata', handleVideoLoaded);
+    };
+  }, []);
+
+  // Simulate loading progress when video isn't fully loaded
+  useEffect(() => {
+    if (!videoLoaded) {
+      const progressInterval = setInterval(() => {
+        setVideoLoadProgress(prev => {
+          // Progress slowly up to 90%, the final 10% will happen when video actually loads
+          const newProgress = prev + (Math.random() * 3);
+          return newProgress < 90 ? newProgress : 90;
+        });
+      }, 200);
+
+      return () => clearInterval(progressInterval);
+    } else {
+      setVideoLoadProgress(100); // Set to 100% when video is loaded
+    }
+  }, [videoLoaded]);
 
   // --- Styles ---
 
@@ -133,13 +181,27 @@ function NiaHero({ onJoinWaitlistClick }) {
     top: 'auto', // Override top position
     zIndex: 1, // Ensure video is at the bottom of the stack
     filter: 'hue-rotate(210deg) saturate(150%) brightness(80%)', // Add blue tint filter
+    opacity: videoLoaded ? 1 : 0, // Hide video until loaded
+    transition: 'opacity 0.5s ease-in-out',
   };
 
   return (
     <section style={sectionStyle} className="nia-hero">
       {/* Video background */}
       <div style={videoContainerStyle}>
+        {!videoLoaded && (
+          <div className="video-loading-container">
+            <div className="loading-bar-container">
+              <div 
+                className="loading-bar" 
+                style={{ width: `${videoLoadProgress}%` }}
+              />
+            </div>
+            <div className="loading-text">Loading video...</div>
+          </div>
+        )}
         <video 
+          ref={videoRef}
           style={videoStyle} 
           autoPlay 
           loop 
@@ -149,6 +211,10 @@ function NiaHero({ onJoinWaitlistClick }) {
           <source 
             src="https://eubzkoywhckxuyrjsrje.supabase.co/storage/v1/object/public/website/line-waves.webm?t=2024-03-19T22%3A09%3A07.266Z" 
             type="video/webm" 
+          />
+          <source
+            src="https://eubzkoywhckxuyrjsrje.supabase.co/storage/v1/object/public/website/line-waves.mp4?t=2024-03-19T22%3A09%3A07.266Z"
+            type="video/mp4"
           />
           Your browser does not support the video tag.
         </video>
@@ -203,7 +269,7 @@ function NiaHero({ onJoinWaitlistClick }) {
           </svg>
         </button>
       </div>
-      <JoinWaitlist onJoinWaitlistClick={onJoinWaitlistClick} />
+      {/* <JoinWaitlist onJoinWaitlistClick={onJoinWaitlistClick} /> */}
     </section>
   );
 }
