@@ -3,7 +3,6 @@ import streaqueLogo from '../assets/streaque-logo.png'; // Header logo
 import niaHeroLogo from '../assets/nia-hero-logo.png'; // Import the Nia hero logo (commented out)
 import NiaText from './NiaText.jsx'; // Import the NiaText component
 import './NiaHero.css'; // Import the new CSS file
-import JoinWaitlist from './JoinWaitlist.jsx';
 
 const sentences = [
   "The AI partner transforming student success and staff workflows.",
@@ -269,7 +268,6 @@ function NiaHero({ onJoinWaitlistClick }) {
           </svg>
         </button>
       </div>
-      {/* <JoinWaitlist onJoinWaitlistClick={onJoinWaitlistClick} /> */}
     </section>
   );
 }
